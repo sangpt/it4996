@@ -24,6 +24,7 @@ gem "bcrypt", "~> 3.1.7"
 # gem "rack-cors"
 gem "mongoid", "~> 6.3.0"
 # gem "mongoid-enum", "~> 0.4.0"
+gem "config"
 
 group :development, :test do
   # Call "byebug" anywhere in the code to stop execution and get a debugger console
