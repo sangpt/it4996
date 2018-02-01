@@ -39,6 +39,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (8.0.0)
+    bcrypt (3.1.11)
     better_errors (2.4.0)
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
@@ -88,7 +89,7 @@ GEM
     pry-rails (0.3.6)
       pry (>= 0.10.4)
     puma (3.11.2)
-    rack (2.0.3)
+    rack (2.0.4)
     rack-test (0.8.2)
       rack (>= 1.0, < 3)
     rails (5.1.4)
@@ -143,11 +144,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   better_errors
   factory_girl_rails
   faker
   listen (>= 3.0.5, < 3.2)
-  mongoid
+  mongoid (~> 6.3.0)
   pry-rails
   puma (~> 3.7)
   rails (~> 5.1.4)
