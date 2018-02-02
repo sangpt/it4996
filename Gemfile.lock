@@ -60,8 +60,7 @@ GEM
     factory_bot_rails (4.8.2)
       factory_bot (~> 4.8.2)
       railties (>= 3.0.0)
-    faker (1.8.7)
-      i18n (>= 0.7)
+    ffaker (2.8.1)
     ffi (1.9.18)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -172,7 +171,7 @@ DEPENDENCIES
   better_errors
   config
   factory_bot_rails
-  faker
+  ffaker
   listen (>= 3.0.5, < 3.2)
   mongoid (~> 6.3.0)
   pry-rails
