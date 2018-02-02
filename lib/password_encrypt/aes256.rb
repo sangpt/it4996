@@ -41,10 +41,10 @@ class PasswordEncrypt::AES256
     end
 
     def aes_key server
-      File.join Settings.file_location.root_dir, "aes_key_#{server}.aes"
+      Rails.root.join "lib/aes_keys/aes_key_#{server}.aes"
     end
     def aes_iv server
-      File.join Settings.file_location.root_dir, "aes_iv_#{server}.aes"
+      Rails.root.join "lib/aes_keys/aes_iv_#{server}.aes"
     end
   end
 end

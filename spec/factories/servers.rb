@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :server do
     server "MyString"
     database "MyString"
