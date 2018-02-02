@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :request do
     device_id "MyString"
     content "MyString"
