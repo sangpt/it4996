@@ -3,4 +3,8 @@ Rails.application.routes.draw do
 
   resources :pages
   devise_for :clients
+
+  authenticated :client do
+    root "pages#index"
+  end
 end
