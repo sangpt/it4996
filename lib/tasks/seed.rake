@@ -58,4 +58,15 @@ namespace :db do
 
     puts "================== END =================="
   end
+
+  desc "Create duration for Request"
+  task duration: :environment do
+    puts "================== START =================="
+
+    Request.all.each do |request|
+      request.update_attributes duration: request.start_time.to_i - request.end_time.to_i
+    end
+
+    puts "================== END =================="
+  end
 end
