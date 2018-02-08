@@ -27,9 +27,17 @@ class Request
   scope :error, -> do
     any_of({start_time: nil}, {end_time: nil})
   end
-  scope :avg_duration, ->{avg :duration}
+  # scope :avg_duration, ->{avg :duration}
+  #
+  # scope :avg_word, -> do
+  #   sum(:duration) / sum(:token_number)
+  # end
 
-  scope :avg_word, -> do
-    sum(:duration) / sum(:token_number)
+  def success?
+    !(start_time == nil || end_time == nil)
+  end
+
+  def error?
+    !success?
   end
 end

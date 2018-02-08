@@ -12,6 +12,17 @@
     </tr>
   </thead>
   <tbody>
-
+    <% @data.each do |row| %>
+      <tr>
+        <td></td>
+        <td><%= row.first %></td>
+        <td><%= row.second.count %></td>
+        <td><%= row.second.select{|r| r.success?}.count %></td>
+        <td><%= row.second.select{|r| r.error?}.count %></td>
+        <td><%= row.second.map(&:duration).reduce(:+) / row.second.count %></td>
+        <td><%= row.second.map(&:token_number).reduce(:+) %></td>
+        <td>View</td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
