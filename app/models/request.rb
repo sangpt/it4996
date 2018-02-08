@@ -16,7 +16,20 @@ class Request
   field :status, type: String
   field :message, type: String
   field :token_number, type: Integer
+  field :duration, type: Integer
   field :tts_engine_ip, type: String
   field :is_streaming, type: Mongoid::Boolean
   has_many :requests, class_name: ServerRequest.name
+
+  scope :success, -> do
+    where(:start_time.ne => nil, :end_time.ne => nil)
+  end
+  scope :error, -> do
+    any_of({start_time: nil}, {end_time: nil})
+  end
+  scope :avg_duration, ->{avg :duration}
+
+  scope :avg_word, -> do
+    sum(:duration) / sum(:token_number)
+  end
 end
