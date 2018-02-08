@@ -1,5 +1,9 @@
 Rails.application.configure do
+<<<<<<< b953c1f04488544f75764d6e9405cd732880740c
   # Settings specified here will take precedence over those in config/application.rb.
+=======
+   config.webpacker.check_yarn_integrity = false  # Settings specified here will take precedence over those in config/application.rb.
+>>>>>>> recreate project
 
   # Code is not reloaded between requests.
   config.cache_classes = true
@@ -23,6 +27,17 @@ Rails.application.configure do
   # Apache or NGINX already handles this.
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
+<<<<<<< b953c1f04488544f75764d6e9405cd732880740c
+=======
+  # Compress JavaScripts and CSS.
+  config.assets.js_compressor = :uglifier
+  # config.assets.css_compressor = :sass
+
+  # Do not fallback to assets pipeline if a precompiled asset is missed.
+  config.assets.compile = false
+
+  # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
+>>>>>>> recreate project
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = 'http://assets.example.com'
@@ -51,7 +66,11 @@ Rails.application.configure do
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
+<<<<<<< b953c1f04488544f75764d6e9405cd732880740c
   # config.active_job.queue_name_prefix = "hust_#{Rails.env}"
+=======
+  # config.active_job.queue_name_prefix = "no-api-hust_#{Rails.env}"
+>>>>>>> recreate project
   config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.

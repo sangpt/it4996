@@ -1,5 +1,9 @@
 Rails.application.configure do
+<<<<<<< b953c1f04488544f75764d6e9405cd732880740c
   # Settings specified here will take precedence over those in config/application.rb.
+=======
+    config.webpacker.check_yarn_integrity = true  # Settings specified here will take precedence over those in config/application.rb.
+>>>>>>> recreate project
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
@@ -34,6 +38,16 @@ Rails.application.configure do
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
+<<<<<<< b953c1f04488544f75764d6e9405cd732880740c
+=======
+  # Debug mode disables concatenation and preprocessing of assets.
+  # This option may cause significant delays in view rendering with a large
+  # number of complex assets.
+  config.assets.debug = true
+
+  # Suppress logger output for asset requests.
+  config.assets.quiet = true
+>>>>>>> recreate project
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true

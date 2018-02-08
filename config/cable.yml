@@ -7,4 +7,8 @@ test:
 production:
   adapter: redis
   url: redis://localhost:6379/1
+<<<<<<< b953c1f04488544f75764d6e9405cd732880740c
   channel_prefix: hust_production
+=======
+  channel_prefix: no-api-hust_production
+>>>>>>> recreate project
