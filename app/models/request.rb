@@ -27,11 +27,13 @@ class Request
   scope :error, -> do
     any_of({start_time: nil}, {end_time: nil})
   end
-  # scope :avg_duration, ->{avg :duration}
-  #
-  # scope :avg_word, -> do
-  #   sum(:duration) / sum(:token_number)
-  # end
+  scope :today, -> {where(:start_time.gte => Time.zone.now.beginning_of_day)}
+  scope :in_date, ->(date){
+    where(:start_time => date.beginning_of_day..date.end_of_day)
+  }
+  scope :between_date, ->(start_date, end_date) do
+    where(:start_time => start_date.beginning_of_day..end_date.end_of_day)
+  end
 
   def success?
     !(start_time == nil || end_time == nil)

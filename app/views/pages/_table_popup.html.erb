@@ -1,0 +1,32 @@
+<table id="datatable_popup" class="table table-striped table-bordered dataTable no-footer">
+  <thead>
+    <tr>
+      <td class="stt">#</td>
+      <td>Device id</td>
+      <td>Content</td>
+      <td>Start time</td>
+      <td>End time</td>
+      <td>Input type</td>
+      <td>Output type</td>
+      <td>Token number</td>
+      <td>TTS engine IP</td>
+      <td>Action</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% requests.each do |request| %>
+      <tr>
+        <td></td>
+        <td><%= request.device_id %></td>
+        <td><%= request.content %></td>
+        <td><%= request.start_time %></td>
+        <td><%= request.end_time %></td>
+        <td><%= request.input_type %></td>
+        <td><%= request.output_type %></td>
+        <td><%= request.token_number %></td>
+        <td><%= request.tts_engine_ip %></td>
+        <td>View</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

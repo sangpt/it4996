@@ -7,4 +7,12 @@ module ApplicationHelper
     when "alert", "warning" then "alert-warning"
     end
   end
+
+  def validate_expression expression
+    begin
+      expression
+    rescue
+      0
+    end
+  end
 end

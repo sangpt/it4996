@@ -16,3 +16,4 @@
 //= require turbolinks
 //= require gentelella
 //= require datatable
+//= require datepicker
