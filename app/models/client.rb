@@ -26,4 +26,10 @@ class Client
 
   has_and_belongs_to_many :services
   has_many :requests
+
+  class << self
+    def test
+      find_by email: 'a@a.com'
+    end
+  end
 end
