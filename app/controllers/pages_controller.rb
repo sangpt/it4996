@@ -18,6 +18,7 @@ class PagesController < ApplicationController
     @data = @requests.group_by do |request|
       request.start_time.to_date
     end
+    @today_requests = @requests.today
   end
 
   private
@@ -27,6 +28,6 @@ class PagesController < ApplicationController
   end
 
   def today_statitics
-
+    @today_requests = @requests.today
   end
 end
