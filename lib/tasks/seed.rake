@@ -37,11 +37,13 @@ namespace :db do
       1000.times do |i|
         subservice.requests.create content: FFaker::Lorem.paragraph,
         start_time: i.hours.ago,
-        end_time: (i+1).hours.ago,
+        end_time: (i-1).hours.ago,
         input_type: ["voice", "text"].sample,
         output_type: ["voice", "text"].sample,
         status: "success",
         token_number: rand(500),
+        tts_engine_ip: FFaker::Internet.ip_v4_address,
+        device_id: FFaker::Internet.ip_v4_address,
         client: all_clients.sample
       end
     end
@@ -55,6 +57,9 @@ namespace :db do
       end
     end
 
+    puts "Generating admin..."
+    Admin.create email: 'admin@gmail.com', password: '123123',
+      name: 'Admin'
 
     puts "================== END =================="
   end
