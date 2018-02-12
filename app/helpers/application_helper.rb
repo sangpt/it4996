@@ -15,4 +15,8 @@ module ApplicationHelper
       0
     end
   end
+
+  def current_user
+    current_client || current_admin
+  end
 end
