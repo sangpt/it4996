@@ -6,6 +6,7 @@ class Client
          :recoverable, :rememberable, :trackable, :validatable
 
   field :username, type: String
+  field :name, type: String
   field :email, type: String
   field :email, type: String, default: ""
   field :encrypted_password, type: String, default: ""
@@ -29,7 +30,7 @@ class Client
 
   class << self
     def test
-      find_by email: 'a@a.com'
+      find_by email: 'client@gmail.com'
     end
   end
 end

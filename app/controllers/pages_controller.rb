@@ -18,7 +18,7 @@ class PagesController < ApplicationController
     @data = @requests.group_by do |request|
       request.start_time.to_date
     end
-    @today_requests = @requests
+    @today_requests = @requests.from_beginning_of_month
   end
 
   private

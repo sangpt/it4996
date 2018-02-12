@@ -13,6 +13,7 @@
 //= require jquery2
 //= require bootstrap-sprockets
 //= require rails-ujs
-//= require turbolinks
 //= require gentelella
 //= require datatable
+//= require datepicker
+//= require popup
