@@ -36,10 +36,10 @@
 //= require gentelella/vendors/Flot/jquery.flot.resize.js
 //= require gentelella/vendors/moment/min/moment.min.js
 //= require gentelella/vendors/bootstrap-daterangepicker/daterangepicker.js
-//= require gentelella/production/js/flot/jquery.flot.orderBars.js
-//= require gentelella/production/js/flot/jquery.flot.spline.js
-//= require gentelella/production/js/flot/curvedLines.js
-//= require gentelella/production/js/flot/date.js
+//= require flot/jquery.flot.orderBars.js
+//= require flot/jquery.flot.spline.js
+//= require flot/curvedLines.js
+//= require flot/date.js
 //= require gentelella/vendors/fastclick/lib/fastclick
 //= require gentelella/vendors/raphael/raphael.min.js
 //= require gentelella/vendors/morris.js/morris.min.js
