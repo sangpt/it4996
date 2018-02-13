@@ -23,4 +23,4 @@
 yarn-debug.log*
 yarn-error.log*
 .yarn-integrity
-lib/aes_keys/
+lib/aes_keys/*.aes

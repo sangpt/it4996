@@ -1,6 +1,6 @@
 # Installation Guide - Ubuntu 16.04
 
-## Via `Docker`
+## Via `Docker` and `Docker Compose`
 
 ### Build and start docker images
 
