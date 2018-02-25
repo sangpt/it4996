@@ -17,7 +17,7 @@ class PagesController < ApplicationController
     @requests = client.requests
     @data = @requests.group_by do |request|
       request.start_time.to_date
-    end
+    end.sort.to_h
     @today_requests = @requests.from_beginning_of_month
   end
 

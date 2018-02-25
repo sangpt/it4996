@@ -14,7 +14,7 @@
         </div>
         <div class="profile_info">
           <span>Welcome,</span>
-          <h2>John Doe</h2>
+          <h2><%= current_user.name %></h2>
         </div>
       </div>
       <!-- /menu profile quick info -->
@@ -44,9 +44,9 @@
         <a data-toggle="tooltip" data-placement="top" title="Settings">
           <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
         </a>
-        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+        <%= link_to "javascript:void(0)", onclick: "screenfull.toggle();", data: {toggle: :tooltip, placement: :top}, title: "Fullscreen" do %>
           <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-        </a>
+        <% end %>
         <a data-toggle="tooltip" data-placement="top" title="Lock">
           <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
         </a>

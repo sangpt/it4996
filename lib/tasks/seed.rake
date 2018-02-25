@@ -6,7 +6,7 @@ namespace :db do
     puts "================== START =================="
 
     puts "Generating server..."
-    100.times do
+    10.times do
       Server.create server: FFaker::Internet.ip_v4_address,
         database: FFaker::Internet.domain_word,
         username: FFaker::Internet.user_name,
@@ -24,23 +24,27 @@ namespace :db do
 
     puts "Generating client..."
     all_services = Service.all
-    20.times do
+    10.times do
       Client.create username: FFaker::Internet.user_name,
         email: FFaker::Internet.email,
         password: FFaker::Internet.password,
         services: all_services.shuffle.first(rand(1..5))
     end
+    Client.create username: 'Sang Pham',
+      email: 'client@gmail.com',
+      password: '123123',
+      services: all_services.shuffle.first(rand(1..5))
 
     puts "Generating request..."
     all_clients = Client.all
     Subservice.all.each do |subservice|
-      1000.times do |i|
+      200.times do |i|
         subservice.requests.create content: FFaker::Lorem.paragraph,
         start_time: i.hours.ago,
-        end_time: (i-1).hours.ago,
+        end_time: (i-6).hours.ago,
         input_type: ["voice", "text"].sample,
         output_type: ["voice", "text"].sample,
-        status: "success",
+        status: ["success", "error"].sample,
         token_number: rand(500),
         tts_engine_ip: FFaker::Internet.ip_v4_address,
         device_id: FFaker::Internet.ip_v4_address,
@@ -51,7 +55,7 @@ namespace :db do
     puts "Generating server_request..."
     all_servers = Server.all
     Request.all.each do |request|
-      5.times do |i|
+      3.times do |i|
         request.requests.create server: all_servers.sample,
           action: "Action#{i}"
       end
@@ -69,7 +73,7 @@ namespace :db do
     puts "================== START =================="
 
     Request.all.each do |request|
-      request.update_attributes duration: request.start_time.to_i - request.end_time.to_i
+      request.update_attributes duration: request.end_time.to_i - request.start_time.to_i
     end
 
     puts "================== END =================="

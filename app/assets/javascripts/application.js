@@ -17,3 +17,4 @@
 //= require datatable
 //= require datepicker
 //= require popup
+//= require highcharts

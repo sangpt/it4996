@@ -22,10 +22,12 @@ class Request
   has_many :requests, class_name: ServerRequest.name
 
   scope :success, -> do
-    where(:start_time.ne => nil, :end_time.ne => nil)
+    # where(:start_time.ne => nil, :end_time.ne => nil)
+    where(status: "success")
   end
   scope :error, -> do
-    any_of({start_time: nil}, {end_time: nil})
+    # any_of({start_time: nil}, {end_time: nil})
+    where(status: "error")
   end
   scope :today, -> {where(:start_time.gte => Time.zone.now.beginning_of_day)}
   scope :in_date, ->(date){
@@ -39,10 +41,12 @@ class Request
   end
 
   def success?
-    !(start_time == nil || end_time == nil)
+    # !(start_time == nil || end_time == nil)
+    status == "success"
   end
 
   def error?
-    !success?
+    # !success?
+    status == "error"
   end
 end
