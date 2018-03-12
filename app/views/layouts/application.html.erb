@@ -10,11 +10,6 @@
   </head>
 
   <body class="nav-md">
-    <div class="container body">
-      <%= render "layouts/sidenav" %>
-      <%= render "layouts/topnav" %>
-      <%= yield %>
-      <%= render "layouts/footer" %>
-    </div>
+    <%= react_component("App") %>
   </body>
 </html>

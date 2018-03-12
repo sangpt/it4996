@@ -16,4 +16,8 @@ Rails.application.routes.draw do
   devise_scope :client do
     root "devise/sessions#new"
   end
+
+  scope :auth do
+    get "is_signed_in", to: "auth#is_signed_in"
+  end
 end
