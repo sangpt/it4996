@@ -23,7 +23,7 @@ function Stat ({title, value, bottom}) {
     <Col md={2} sm={4} xs={6} className="tile_stats_count">
       <span className="count_top"><i className={`fa fa-${title.icon || 'user'}`}></i> {title.label}</span>
       <div className={cn('count', value.className)}>{value.label}</div>
-      <span className="count_bottom"><i className={bottom.className || 'green'}>{bottom.stat} </i> {bottom.label}</span>
+      <span className="count_bottom"><i className={bottom.className || 'green'}>{bottom.label} </i></span>
     </Col>
   )
 }

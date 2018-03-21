@@ -23,7 +23,7 @@ services:
     volumes:
       - .:/it4996
     ports:
-      - 3333:3333
+      - 3000:3000
     depends_on:
       - db
       # - redis

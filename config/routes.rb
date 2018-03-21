@@ -23,4 +23,12 @@ Rails.application.routes.draw do
     root "pages#index"
     resources :clients, only: :show
   end
+
+  namespace :api do
+    namespace :v1 do
+      namespace :dashboards do
+        get :top_title, to: "top_title"
+      end
+    end
+  end
 end
