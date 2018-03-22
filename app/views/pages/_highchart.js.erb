@@ -4,10 +4,10 @@ var options = {
         zoomType: 'xy'
     },
     title: {
-        text: 'Average Monthly Temperature and Rainfall in Tokyo'
+        text: 'Requests Chart'
     },
     subtitle: {
-        text: 'Source: WorldClimate.com'
+        text: ''
     },
     xAxis: [{
         categories: <%= data.keys.map(&:to_s).to_s.html_safe %>,
@@ -20,14 +20,14 @@ var options = {
             }
         },
         title: {
-            text: 'Temperature',
+            text: 'Request',
             style: {
                 color: Highcharts.getOptions().colors[1]
             }
         }
     }, { // Secondary yAxis
         title: {
-            text: 'Rainfall',
+            text: 'Percent success',
             style: {
                 color: Highcharts.getOptions().colors[0]
             }
