@@ -10,6 +10,7 @@ import TodoList from './TodoList'
 import Weather from './Weather'
 import TopTile from './TopTile'
 import Chart from './Chart'
+import TableRequest from './TableRequest'
 
 class Dashboard extends Component {
   render () {
@@ -25,16 +26,12 @@ class Dashboard extends Component {
           </Row>
           <br />
           <Row>
-            <Col md={4} sm={4} xs={12}>
-              <AppVersions />
-            </Col>
-            <Col md={4} sm={4} xs={12}>
-              <DeviceUsage />
-            </Col>
-            <Col md={4} sm={4} xs={12}>
-              <QuickSettings />
+            <Col md={12} sm={12} xs={12}>
+              <TableRequest />
             </Col>
           </Row>
+          <br />
+
           <Row>
             <RecentActivities />
             <Col md={8} sm={8} xs={12}>

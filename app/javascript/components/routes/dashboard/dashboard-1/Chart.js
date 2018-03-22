@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import XPanel from '../../../components/XPanel'
+import DateRangePicker from '../../../components/DateRangePicker'
 import Highchart from '../../../components/widgets/Highchart'
-import { Col } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 
 class Chart extends Component {
   constructor (props) {
@@ -17,10 +18,20 @@ class Chart extends Component {
 
     return (
       <XPanel visible={panelVisible} onHide={onHide}>
-        <XPanel.Title title="Chart" smallTitle="geo-presentation" />
+      <div className="x_title">
+        <Row>
+          <Col md={6} xs={6}>
+            <h2>Chart</h2>
+          </Col>
+          <Col md={6} xs={6}>
+            <DateRangePicker />
+          </Col>
+        </Row>
+        <div className="clearfix"></div>
+      </div>
         <XPanel.Content>
           <div className="dashboard-widget-content">
-            <Highchart url={'/api/v1/dashboards/chart_number_requests.json'}/>
+            <Highchart url={'/api/v1/dashboards/chart_number_requests.json'} start_date={}/>
           </div>
         </XPanel.Content>
       </XPanel>

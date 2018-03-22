@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       namespace :dashboards do
         get :top_title, to: "top_title"
         get :chart_number_requests, to: "chart_number_requests"
+        get :table_request, to: "table_request"
       end
     end
   end

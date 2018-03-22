@@ -9,7 +9,12 @@ class Api::V1::DashboardsController < ApplicationController
 
   def chart_number_requests
     @requests = client.requests
-    @data = @requests.group_by{|request| request.start_time.to_date}.sort.last(7).to_h
+    @data = @requests.group_by{|request| Time.at(request.start_time/1000).to_date}.sort.last(7).to_h
+  end
+
+  def table_request
+    @requests = client.requests
+    @data = @requests.group_by{|request| Time.at(request.start_time/1000).to_date}.sort.to_h
   end
 
   private

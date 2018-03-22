@@ -6,11 +6,11 @@ class DashboardForm
   end
 
   def total_requests
-    requests.nil? ? 0 :requests.size
+    requests.nil? ? 0 : requests.size
   end
 
   def total_words
-    requests.nil? ? 0 : requests.sum(:token_number)
+    requests.nil? ? 0 : requests.sum(:number_of_words)
   end
 
   def total_request_success
