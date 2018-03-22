@@ -4,6 +4,7 @@ import TimeLine from './TimeLine'
 import TodoList from './TodoList'
 import WeatherPanel, { WEATHER_ICONS } from './weather/WeatherPanel'
 import TopTileStats from './TopTileStats'
+import Highchart from './Highchart'
 
 export {
   Summary,
@@ -13,5 +14,6 @@ export {
   TodoList,
   WeatherPanel,
   WEATHER_ICONS,
-  TopTileStats
+  TopTileStats,
+  Highchart
 }

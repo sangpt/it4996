@@ -7,7 +7,14 @@ class Api::V1::DashboardsController < ApplicationController
     @form = ::DashboardForm.new @this_months_requests
   end
 
+  def chart_number_requests
+    @requests = client.requests
+    @data = @requests.group_by{|request| request.start_time.to_date}.sort.last(7).to_h
+  end
+
   private
+
+  attr_accessor :requests
 
   def client
     current_client

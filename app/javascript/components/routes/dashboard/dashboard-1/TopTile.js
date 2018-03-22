@@ -46,13 +46,11 @@ class TopTile extends Component {
       type: 'GET',
       dataType: 'json',
     }).done((response) => {
-      console.log("done");
       this.setState({stats: response});
     });
   }
 
   render () {
-    console.log("render");
     return (
       <TopTileStats stats={this.state.stats} />
     )

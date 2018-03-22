@@ -66,8 +66,6 @@
 //= require bootstrap-datepicker/dist/js/bootstrap-datepicker.js
 //= require gentelella/vendors/parsleyjs/dist/parsley.js
 //= require screenfull/dist/screenfull.js
-//= require highcharts/highcharts.js
-//= require jquery.highchartTable.js
 //= require autonumeric/dist/autoNumeric.min.js
 //= require wysihtml5.js
 

@@ -9,6 +9,7 @@ import VisitorsLocations from './VisitorsLocations'
 import TodoList from './TodoList'
 import Weather from './Weather'
 import TopTile from './TopTile'
+import Chart from './Chart'
 
 class Dashboard extends Component {
   render () {
@@ -19,7 +20,7 @@ class Dashboard extends Component {
           <TopTile />
           <Row>
             <Col md={12} sm={12} xs={12}>
-              <NetworkActivities />
+              <Chart />
             </Col>
           </Row>
           <br />
@@ -27,7 +28,7 @@ class Dashboard extends Component {
             <Col md={4} sm={4} xs={12}>
               <AppVersions />
             </Col>
-            <Col md={4} sm={4} xs={12}>            
+            <Col md={4} sm={4} xs={12}>
               <DeviceUsage />
             </Col>
             <Col md={4} sm={4} xs={12}>
