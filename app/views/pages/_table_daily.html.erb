@@ -20,7 +20,7 @@
         <td><%= row.second.select{|r| r.success?}.count %></td>
         <td><%= row.second.select{|r| r.error?}.count %></td>
         <td><%= row.second.map(&:duration).reduce(:+).to_i / row.second.count %></td>
-        <td><%= row.second.map(&:token_number).reduce(:+) %></td>
+        <td><%= row.second.map(&:number_of_words).reduce(:+) %></td>
         <td><%= link_to "View", requests_client_path(current_client, date: row.first), remote: true %></td>
       </tr>
     <% end %>

@@ -19,4 +19,11 @@ module ApplicationHelper
   def current_user
     current_client || current_admin
   end
+
+  def request_input_text request
+    return unless request.input_text
+    request.input_text[0][:sentences].map{|sentence| sentence[:content]}.join
+  rescue
+  
+  end
 end

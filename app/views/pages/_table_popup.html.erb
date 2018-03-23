@@ -4,11 +4,13 @@
       <td class="stt">#</td>
       <td>Device id</td>
       <td>Content</td>
+      <td>Service name</td>
+      <td>Voice name</td>
       <td>Start time</td>
       <td>End time</td>
       <td>Input type</td>
       <td>Output type</td>
-      <td>Token number</td>
+      <td>Number of words</td>
       <td>TTS engine IP</td>
     </tr>
   </thead>
@@ -17,12 +19,14 @@
       <tr>
         <td></td>
         <td><%= request.device_id %></td>
-        <td><%= request.content %></td>
+        <td><%= request_input_text(request) %></td>
+        <td><%= request.service_name %></td>
+        <td><%= request.voice_name %></td>
         <td><%= request.start_time %></td>
         <td><%= request.end_time %></td>
         <td><%= request.input_type %></td>
         <td><%= request.output_type %></td>
-        <td><%= request.token_number %></td>
+        <td><%= request.number_of_words %></td>
         <td><%= request.tts_engine_ip %></td>
       </tr>
     <% end %>

@@ -25,8 +25,19 @@ class Client
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
 
+  field :client_id, type: Integer
+
   has_and_belongs_to_many :services
-  has_many :requests
+  # has_many :requests
+  # has_many :apps, class_name: App.name, inverse_of: :client_id
+
+  def apps
+    App.where(client_id: client_id) if client_id
+  end
+
+  def requests
+    Request.where(:app_id.in => apps.pluck(:app_id)) if apps
+  end
 
   class << self
     def test
