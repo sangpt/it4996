@@ -14,14 +14,19 @@ class PagesController < ApplicationController
     #     }},
     #   ]
     # )
-    @requests = client.requests
-    @data = @requests.group_by do |request|
-      request.start_time.to_date
-    end.sort.to_h
-    @today_requests = @requests.from_beginning_of_month
+    # requests = client.requests
+    @data = requests.group_by{|request| request.start_time.to_date}.sort.to_h
+    @today_requests = client.requests.from_beginning_of_month
   end
 
   private
+
+  def requests
+    return client.requests.from_beginning_of_month unless params[:start_date] && params[:end_date]
+    start_date = Date.new *params[:start_date].split("-").map(&:to_i)
+    end_date = Date.new *params[:end_date].split("-").map(&:to_i)
+    @requests ||= (client.requests.between_date(start_date, end_date) || client.requests.from_beginning_of_month)
+  end
 
   def client
     current_client

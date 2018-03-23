@@ -8,12 +8,19 @@ Rails.application.routes.draw do
   authenticated :client do
     root "pages#index"
   end
+
   resources :clients do
     member do
       get :requests
     end
   end
+
   devise_scope :client do
     root "devise/sessions#new"
+  end
+
+  namespace :admin do
+    root "pages#index"
+    resources :clients, only: :show
   end
 end

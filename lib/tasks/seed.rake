@@ -64,10 +64,10 @@ namespace :db do
             input_type: ["voice", "text"].sample,
             output_type: ["audio", "text"].sample,
             status: ["success", "error"].sample,
-            token_number: content.length,
+            token_number: content.split.length,
             tts_engine_ip: FFaker::Internet.ip_v4_address,
             device_id: FFaker::Internet.ip_v4_address,
-            client: all_client_ids.sample,
+            client_id: all_client_ids.sample,
             subservice_id: subservice.id
           }
         end

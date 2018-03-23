@@ -99,7 +99,10 @@ function init_daterangepicker() {
     console.log("hide event fired");
   });
   $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
-    console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
+    let start_date = picker.startDate.format('YYYY-MM-DD');
+    let end_date = picker.endDate.format('YYYY-MM-DD');
+    window.location.href = window.location.pathname+"?"+$.param({'start_date':start_date,'end_date':end_date});
+    // console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
   });
   $('#reportrange').on('cancel.daterangepicker', function(ev, picker) {
     console.log("cancel event fired");
