@@ -15,5 +15,4 @@
 //= require rails-ujs
 //= require gentelella
 //= require datatable
-//= require datepicker
 //= require popup

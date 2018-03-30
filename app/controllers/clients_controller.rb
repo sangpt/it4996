@@ -8,7 +8,8 @@ class ClientsController < ApplicationController
   private
 
   def load_client
-    @client = Client.find params[:id]
+    # @client = Client.find params[:id]
+    @client = Client.test
   end
 
   def load_date

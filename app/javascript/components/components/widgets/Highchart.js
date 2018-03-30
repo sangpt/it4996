@@ -126,29 +126,34 @@ class Highchart extends React.Component {
     this.state = {id: Math.random().toString()}
   }
 
-  componentWillMount() {
+  getData() {
     $.ajax({
       url: this.props.url,
       type: 'GET',
       dataType: 'json',
     }).done((response) => {
-      // console.log("get chart");
-      // console.log(response);
+      // console.log('done async');
       this.setState({option: response});
       Highcharts.chart(this.state.id, this.state.option);
     });
   }
 
+  componentWillMount() {
+    this.getData();
+  }
+
   componentDidMount() {
-    console.log('did mount');
-    console.log(this.state.option);
     if (this.state.option) {
       Highcharts.chart(this.state.id, this.state.option);
     }
   }
 
+  componentWillReceiveProps() {
+    this.getData();
+  }
+
   render() {
-    console.log('render chart');
+    // console.log('render mini chart');
     return (
       <div id={this.state.id}></div>
     )

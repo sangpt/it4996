@@ -14,7 +14,7 @@ class Request
   field :output_type, type: String
   field :sample_rate, type: String
   field :bit_rate, type: String
-  field :status, type: String
+  field :status, type: Integer
   field :message, type: String
   field :token_number, type: Integer
   field :duration, type: Integer
@@ -23,16 +23,17 @@ class Request
   field :app_id, type: String
   field :number_of_words, type: Integer
   field :service_name, type: String
+  field :origin_text, type: String
   has_many :requests, class_name: ServerRequest.name
   # belongs_to :app, class_name: App.name, inverse_of: 'app_id'
 
   scope :success, -> do
     # where(:start_time.ne => nil, :end_time.ne => nil)
-    where(status: "success")
+    where(status: 1)
   end
   scope :error, -> do
     # any_of({start_time: nil}, {end_time: nil})
-    where(status: "error")
+    where(status: 2)
   end
   scope :today, -> {where(:start_time.gte => Time.zone.now.beginning_of_day.to_i*1000)}
   scope :in_date, ->(date){

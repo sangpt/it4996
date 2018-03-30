@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :clients do
-    member do
+    collection do
       get :requests
     end
   end
@@ -30,6 +30,7 @@ Rails.application.routes.draw do
         get :top_title, to: "top_title"
         get :chart_number_requests, to: "chart_number_requests"
         get :table_request, to: "table_request"
+        get :request_date, to: "request_date"
       end
     end
   end

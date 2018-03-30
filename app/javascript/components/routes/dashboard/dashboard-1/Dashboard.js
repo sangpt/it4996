@@ -31,25 +31,6 @@ class Dashboard extends Component {
             </Col>
           </Row>
           <br />
-
-          <Row>
-            <RecentActivities />
-            <Col md={8} sm={8} xs={12}>
-              <Row>
-                <Col md={12} sm={12} xs={12}>
-                  <VisitorsLocations />
-                </Col>
-              </Row>
-              <Row>
-                <Col md={6} sm={6} cs={12}>
-                  <TodoList />
-                </Col>
-                <Col md={6} sm={6} xs={12}>
-                    <Weather />
-                </Col>
-              </Row>
-            </Col>
-          </Row>
         </div>
     )
   }

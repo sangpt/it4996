@@ -1,132 +1,180 @@
-import React from 'react'
+'use strict';
+import React, { Component } from 'react';
+import $ from 'jquery';
+// import getOptions from './get-options.js';
+import PropTypes from 'prop-types';
+import 'bootstrap-daterangepicker';
 
-class DateRangePicker extends React.Component {
-  componentDidMount() {
-    init_daterangepicker();
+export class DateRangePicker extends Component {
+  constructor(props) {
+    super(props);
+    this.$picker = null;
+    this.options = getOptions();
   }
-
+  componentDidMount() {
+    // initialize
+    this.$picker.daterangepicker(this.getOptionsFromProps(), this.props.callback);
+    // attach event listeners
+    ['Show', 'Hide', 'ShowCalendar', 'HideCalendar', 'Apply', 'Cancel'].forEach(
+      event => {
+        const lcase = event.toLowerCase();
+        this.$picker.on(
+          lcase + '.daterangepicker',
+          this.makeEventHandler('on' + event)
+        );
+      }
+    );
+  }
+  componentWillReceiveProps(nextProps) {
+    const currentOptions = this.getOptionsFromProps();
+    const nextOptions = this.getOptionsFromProps(nextProps);
+    const changedOptions = {};
+    this.options.forEach(option => {
+      if (currentOptions[option] !== nextOptions[option]) {
+        changedOptions[option] = nextOptions[option];
+      }
+    });
+    this.setOptionsFromProps(changedOptions);
+  }
+  componentWillUnmount() {
+    if (this.$picker && this.$picker.data('daterangepicker')) {
+      this.$picker.data('daterangepicker').remove();
+    }
+  }
+  makeEventHandler(eventType) {
+    const { onEvent } = this.props;
+    return (event, picker) => {
+      if (typeof onEvent === 'function') {
+        onEvent(event, picker);
+      }
+      if (typeof this.props[eventType] === 'function') {
+        this.props[eventType](event, picker);
+      }
+    };
+  }
+  getOptionsFromProps(props) {
+    let options;
+    props = props || this.props;
+    this.options.forEach(option => {
+      if (props.hasOwnProperty(option)) {
+        options = options || {};
+        options[option] = props[option];
+      }
+    });
+    return options || {};
+  }
+  setOptionsFromProps(currentOptions) {
+    const keys = Object.keys(currentOptions);
+    keys.forEach(key => {
+      if (key === 'startDate') {
+        this.$picker.data('daterangepicker').setStartDate(currentOptions[key]);
+      } else if (key === 'endDate') {
+        this.$picker.data('daterangepicker').setEndDate(currentOptions[key]);
+      } else {
+        this.$picker.data('daterangepicker')[key] = currentOptions[key];
+      }
+    });
+  }
   render() {
+    const { children, containerStyles, containerClass } = this.props;
     return (
-      <div id="reportrange" className="pull-right" style={{background: '#fff', cursor: 'pointer', padding: '5px 10px', border: '1px solid #ccc'}}>
-        <i className="glyphicon glyphicon-calendar fa fa-calendar"></i>
-        <span>Choose date range...</span> <b className="caret"></b>
+      <div
+        ref={picker => {
+          this.$picker = $(picker);
+        }}
+        className={containerClass}
+        style={containerStyles}
+      >
+        {children}
       </div>
-    )
+    );
   }
 }
+
+const getOptions = () => {
+  return [
+    '<input>',
+    'alwaysShowCalendars',
+    'applyClass',
+    'autoApply',
+    'autoUpdateInput',
+    'buttonClasses',
+    'cancelClass',
+    'dateLimit',
+    'drops',
+    'endDate',
+    'isCustomDate',
+    'isInvalidDate',
+    'linkedCalendars',
+    'locale',
+    'maxDate',
+    'minDate',
+    'opens',
+    'parentEl',
+    'ranges',
+    'showCustomRangeLabel',
+    'showDropdowns',
+    'showISOWeekNumbers',
+    'showWeekNumbers',
+    'singleDatePicker',
+    'startDate',
+    'template',
+    'timePicker',
+    'timePicker24Hour',
+    'timePickerIncrement',
+    'timePickerSeconds',
+    'callback'
+  ];
+}
+
+DateRangePicker.defaultProps = {
+  containerClass: 'react-bootstrap-daterangepicker-container',
+  containerStyles: {
+    display: 'inline-block'
+  }
+};
+
+DateRangePicker.propTypes = {
+  '<input>': PropTypes.any,
+  alwaysShowCalendars: PropTypes.bool,
+  applyClass: PropTypes.string,
+  autoApply: PropTypes.bool,
+  autoUpdateInput: PropTypes.bool,
+  buttonClasses: PropTypes.array,
+  cancelClass: PropTypes.string,
+  children: PropTypes.node.isRequired,
+  containerClass: PropTypes.string,
+  containerStyles: PropTypes.object,
+  dateLimit: PropTypes.object,
+  drops: PropTypes.oneOf(['down', 'up']),
+  endDate: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  isCustomDate: PropTypes.func,
+  isInvalidDate: PropTypes.func,
+  linkedCalendars: PropTypes.bool,
+  locale: PropTypes.object,
+  maxDate: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  minDate: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  onApply: PropTypes.func,
+  onCancel: PropTypes.func,
+  onEvent: PropTypes.func,
+  onHide: PropTypes.func,
+  onHideCalendar: PropTypes.func,
+  onShow: PropTypes.func,
+  onShowCalendar: PropTypes.func,
+  opens: PropTypes.oneOf(['left', 'right', 'center']),
+  parentEl: PropTypes.any,
+  ranges: PropTypes.object,
+  showCustomRangeLabel: PropTypes.bool,
+  showDropdowns: PropTypes.bool,
+  showISOWeekNumbers: PropTypes.bool,
+  showWeekNumbers: PropTypes.bool,
+  singleDatePicker: PropTypes.bool,
+  startDate: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  template: PropTypes.any,
+  timePicker: PropTypes.bool,
+  timePickerIncrement: PropTypes.number,
+  timePicker24Hour: PropTypes.bool,
+  timePickerSeconds: PropTypes.bool
+};
 
 export default DateRangePicker;
-
-function init_daterangepicker() {
-
-  if (typeof($.fn.daterangepicker) === 'undefined') {
-    return;
-  }
-  console.log('init_daterangepicker');
-
-  var cb = function(start, end, label) {
-    console.log(start.toISOString(), end.toISOString(), label);
-    $('#reportrange span').html(start.format('MMMM DD, YYYY') + ' - ' + end.format('MMMM DD, YYYY'));
-  };
-
-  var optionSet1 = {
-    startDate: moment().startOf('month'),
-    endDate: moment(),
-    dateLimit: {
-      days: 60
-    },
-    showDropdowns: true,
-    showWeekNumbers: true,
-    timePicker: false,
-    timePickerIncrement: 1,
-    timePicker12Hour: true,
-    ranges: {
-      'Today': [
-        moment(), moment()
-      ],
-      'Yesterday': [
-        moment().subtract(1, 'days'),
-        moment().subtract(1, 'days')
-      ],
-      'Last 7 Days': [
-        moment().subtract(6, 'days'),
-        moment()
-      ],
-      'Last 30 Days': [
-        moment().subtract(29, 'days'),
-        moment()
-      ],
-      'This Month': [
-        moment().startOf('month'), moment().endOf('month')
-      ],
-      'Last Month': [
-        moment().subtract(1, 'month').startOf('month'),
-        moment().subtract(1, 'month').endOf('month')
-      ]
-    },
-    opens: 'left',
-    buttonClasses: ['btn btn-default'],
-    applyClass: 'btn-small btn-primary',
-    cancelClass: 'btn-small',
-    format: 'DD/MM/YYYY',
-    separator: ' to ',
-    locale: {
-      applyLabel: 'Submit',
-      cancelLabel: 'Clear',
-      fromLabel: 'From',
-      toLabel: 'To',
-      customRangeLabel: 'Custom',
-      daysOfWeek: [
-        'Su',
-        'Mo',
-        'Tu',
-        'We',
-        'Th',
-        'Fr',
-        'Sa'
-      ],
-      monthNames: [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December'
-      ],
-      firstDay: 1
-    }
-  };
-
-  $('#reportrange span').html(moment().startOf('month').format('MMMM DD, YYYY') + ' ~ ' + moment().format('MMMM DD, YYYY'));
-  $('#reportrange').daterangepicker(optionSet1, cb);
-  $('#reportrange').on('show.daterangepicker', function() {
-    console.log("show event fired");
-  });
-  $('#reportrange').on('hide.daterangepicker', function() {
-    console.log("hide event fired");
-  });
-  $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
-    let start_date = picker.startDate.format('YYYY-MM-DD');
-    let end_date = picker.endDate.format('YYYY-MM-DD');
-    window.location.href = window.location.pathname+"?"+$.param({'start_date':start_date,'end_date':end_date});
-    // console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
-  });
-  $('#reportrange').on('cancel.daterangepicker', function(ev, picker) {
-    console.log("cancel event fired");
-  });
-  $('#options1').click(function() {
-    $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
-  });
-  // $('#options2').click(function() {
-  //   $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
-  // });
-  $('#destroy').click(function() {
-    $('#reportrange').data('daterangepicker').remove();
-  });
-}

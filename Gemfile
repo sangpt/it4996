@@ -39,6 +39,7 @@ gem "react-rails"
 gem "bootstrap-sass"
 gem "jquery-rails"
 gem "devise"
+gem 'rack-cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

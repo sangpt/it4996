@@ -1,3 +1,6 @@
-.modal-dialog {
-  width: 98%;
+.modal-dialog, .fade.in.modal {
+  width: 100%;
+  margin: 0;
+  border-radius: 0;
+  font-size: 12px;
 }

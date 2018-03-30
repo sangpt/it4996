@@ -27,4 +27,17 @@ class TableRequest extends React.Component {
   }
 }
 
+function table() {
+  return(
+    <Modal show={this.state.show} onHide={this.handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Modal heading</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <h1>This is a modal</h1>
+      </Modal.Body>
+    </Modal>
+  )
+}
+
 export default TableRequest;
