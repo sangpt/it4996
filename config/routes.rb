@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :admins
+  # devise_for :admins
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   resources :pages
-  devise_for :clients
+  # devise_for :clients
 
-  authenticated :client do
-    root "pages#index"
-  end
+  # authenticated :client do
+  #   root "pages#index"
+  # end
 
   resources :clients do
     collection do
@@ -15,9 +15,9 @@ Rails.application.routes.draw do
     end
   end
 
-  devise_scope :client do
-    root "devise/sessions#new"
-  end
+  # devise_scope :client do
+  #   root "devise/sessions#new"
+  # end
 
   namespace :admin do
     root "pages#index"
@@ -31,7 +31,10 @@ Rails.application.routes.draw do
         get :chart_number_requests, to: "chart_number_requests"
         get :table_request, to: "table_request"
         get :request_date, to: "request_date"
+        get :top_app, to: "top_app"
       end
     end
   end
+
+  resources :sessions
 end

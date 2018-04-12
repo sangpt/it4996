@@ -5,18 +5,19 @@ class Client
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  field :username, type: String
+  # field :username, type: String
   field :name, type: String
   # field :email, type: String
   field :email, type: String, default: ""
   field :encrypted_password, type: String, default: ""
+  field :access_token, type: String, default: ""
 
   ## Recoverable
   field :reset_password_token,   type: String
   field :reset_password_sent_at, type: Time
 
   ## Rememberable
-  field :remember_created_at, type: Time
+  # field :remember_created_at, type: Time
 
   ## Trackable
   field :sign_in_count,      type: Integer, default: 0

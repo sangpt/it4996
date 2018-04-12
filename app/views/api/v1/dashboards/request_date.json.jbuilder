@@ -1,8 +1,8 @@
 json.array! @requests do |request|
     json.key request.id.to_s
     json.device_id request.device_id
-    json.origin_text request.origin_text
-    json.short_origin_text (request.origin_text.length < 150 ? request.origin_text : request.origin_text[0..147] << "...")
+    json.full_origin_text request.origin_text
+    json.origin_text (request.origin_text.length < 50 ? request.origin_text : request.origin_text[0..47] << "...")
     json.service_name request.service_name
     json.voice_name request.voice_name
     json.start_time request.start_time

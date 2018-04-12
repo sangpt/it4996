@@ -25,6 +25,11 @@ class Api::V1::DashboardsController < ApplicationController
     # j render "pages/table_popup", requests: @requests
   end
 
+  def top_app
+    @top_app = client.apps.inject({}){|hash, app| hash.merge(app.id.to_s => [app.app_name, app.requests.count])}
+      .sort_by{|app| app.last.last}.reverse.first(5)
+  end
+
   private
 
   attr_accessor :requests
@@ -37,6 +42,7 @@ class Api::V1::DashboardsController < ApplicationController
   end
 
   def client
+    session[:abc] = 123
     # current_client
     Client.test
   end
