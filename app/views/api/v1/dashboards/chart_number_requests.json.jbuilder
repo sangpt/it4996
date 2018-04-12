@@ -4,9 +4,9 @@ end
 json.title do
   json.text 'Number of Requests chart'
 end
-json.subtitle do
-  json.text 'By number of Requests'
-end
+# json.subtitle do
+#   json.text 'By number of Requests'
+# end
 json.xAxis do
   json.categories @data.keys.map(&:to_s)
   json.crosshair true

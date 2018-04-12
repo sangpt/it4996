@@ -31,6 +31,7 @@ Rails.application.routes.draw do
         get :chart_number_requests, to: "chart_number_requests"
         get :table_request, to: "table_request"
         get :request_date, to: "request_date"
+        get :top_app, to: "top_app"
       end
     end
   end
