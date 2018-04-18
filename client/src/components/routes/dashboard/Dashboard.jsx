@@ -18,6 +18,7 @@ import moment from 'moment';
 const { Content } = Layout;
 import './Dashboard.scss';
 var Highcharts = require('highcharts');
+import ChartContent from './ChartContent';
 
 function onChange(value, dateString) {
   console.log('Selected Time: ', value);
@@ -81,14 +82,14 @@ export default class Dashboard extends React.Component {
     axios.get('http://localhost:3000/api/v1/dashboards/chart_number_requests.json')
       .then((res) => {
         if (res.status == 200) {
-          this.setState({chartData: res.data});
+          this.chartData = res.data;
         }
       })
 
     axios.get('http://localhost:3000/api/v1/dashboards/top_app.json')
       .then((res) => {
         if (res.status == 200) {
-          this.setState({topApp: res.data});
+          this.topApp = res.data;
         }
       })
   }
@@ -97,11 +98,11 @@ export default class Dashboard extends React.Component {
     this.loadData();
   }
 
-  componentDidUpdate() {
-    if (this.state.chartData) {
-      Highcharts.chart('chart_requests', this.state.chartData);
-    }
-  }
+  // componentDidUpdate() {
+  //   if (this.state.chartData) {
+  //     Highcharts.chart('chart_requests', this.state.chartData);
+  //   }
+  // }
 
   showDetail = (e) => {
     this.setState((prevState, props) => {
