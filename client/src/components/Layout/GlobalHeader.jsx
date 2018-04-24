@@ -1,13 +1,16 @@
 import React, { PureComponent } from 'react';
-import { Menu, Icon, Spin, Tag, Dropdown, Avatar, Divider, Tooltip } from 'antd';
+import { Menu, Icon, Spin, Tag, Dropdown, Avatar, Divider, Tooltip, Input } from 'antd';
 import moment from 'moment';
+import { withRouter } from 'react-router-dom';
 // import groupBy from 'lodash/groupBy';
 // import Debounce from 'lodash-decorators/debounce';
 import { Link } from 'dva/router';
 import styles from './GlobalHeader.less';
 import logo from '../../../public/images/vbee-logo.png';
 
-export default class GlobalHeader extends PureComponent {
+const Search = Input.Search;
+
+class GlobalHeader extends PureComponent {
   componentWillUnmount() {
     // this.triggerResizeEvent.cancel();
   }
@@ -23,9 +26,14 @@ export default class GlobalHeader extends PureComponent {
   //   event.initEvent('resize', true, false);
   //   window.dispatchEvent(event);
   // }
-  handleLogout = () => {
-    document.cookie = ""
+  handleSearch = (value) => {
+    this.props.history.push({
+      pathname: '/search',
+      search: `?q=${value}`,
+      state: {q: value}
+    });
   }
+
   render() {
     // const {
     //   currentUser,
@@ -37,6 +45,7 @@ export default class GlobalHeader extends PureComponent {
     //   onMenuClick,
     //   onNoticeClear,
     // } = this.props;
+    // console.log(history.location);
     const {
       collapsed,
       onCollapse
@@ -63,7 +72,12 @@ export default class GlobalHeader extends PureComponent {
           type={collapsed ? 'menu-unfold' : 'menu-fold'}
         />
         <div className="right">
-
+          <Search
+            placeholder="Input search text"
+            onSearch={this.handleSearch}
+            style={{ width: 200 }}
+            defaultValue={new URLSearchParams(this.props.location.search).get('q')}
+          />
           <Dropdown overlay={menu}>
             <span className="action account">
               <Avatar size="small" className="avatar" src={logo} />
@@ -75,3 +89,5 @@ export default class GlobalHeader extends PureComponent {
     );
   }
 }
+
+export default withRouter(GlobalHeader);

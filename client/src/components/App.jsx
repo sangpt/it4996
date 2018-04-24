@@ -8,12 +8,15 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Dashboard from './routes/dashboard';
 import { router } from './Layout/config';
 import axios from 'axios';
+import Search from './routes/search';
+import createHistory from "history/createBrowserHistory";
 
+const history = createHistory();
 const {
     home,
     socialNetworks, sponsors, introductContent,
     staffs, policies, terms,
-    intent, recruitment,
+    intent, recruitment, search,
   } = router;
 
 class App extends React.Component {
@@ -54,6 +57,7 @@ class App extends React.Component {
     <MainLayout handleLogout={this.handleLogout.bind(this)}>
       <Switch>
         <Route exact path={home} component={Dashboard} />
+        <Route path={search} component={Search} />
       </Switch>
     </MainLayout>
   );
