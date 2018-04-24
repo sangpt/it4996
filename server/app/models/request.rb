@@ -1,6 +1,7 @@
 class Request
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Search
 
   # belongs_to :subservice
   # belongs_to :client
@@ -26,6 +27,8 @@ class Request
   field :origin_text, type: String
   # has_many :requests, class_name: ServerRequest.name
   # belongs_to :app, class_name: App.name, inverse_of: 'app_id'
+
+  search_in *attribute_names
 
   scope :success, -> do
     # where(:start_time.ne => nil, :end_time.ne => nil)

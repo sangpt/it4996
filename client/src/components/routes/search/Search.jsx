@@ -12,11 +12,22 @@ import {
   Col,
   Tooltip,
   Input,
+  Modal,
 } from 'antd';
+import axios from 'axios';
 
 const { Content } = Layout;
 
 class Search extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      q: this.params.get('q'),
+      visible: false,
+      content: 'Loading...',
+    }
+  }
+
   params = new URLSearchParams(this.props.location.search);
 
   columns = () => {
@@ -30,8 +41,10 @@ class Search extends React.Component {
       key: 'origin_text',
       render: (text, record) => {
         return (
-          <Tooltip title={record.full_origin_text} >
-            { text }
+          <Tooltip title="Show more..." onClick={this.showModal}>
+            <div data-content={record.full_origin_text}>
+              { text }
+            </div>
           </Tooltip>
         )
       }
@@ -66,6 +79,40 @@ class Search extends React.Component {
     }];
   }
 
+  handleSearch = () => {
+    axios.get(`http://localhost:3000/api/v1/search/search_request.json?q=${this.state.q}`)
+      .then((res) => {
+        if (res.status == 200) {
+          this.setState({tableData: res.data});
+        }
+      })
+  }
+
+  componentWillMount() {
+    this.handleSearch();
+  }
+
+  showModal = (e) => {
+    this.setState({
+      visible: true,
+      content: e.target.dataset.content
+    });
+  }
+
+  handleOk = (e) => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  }
+
+  handleCancel = (e) => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  }
+
   render() {
     return (
       <Content>
@@ -86,9 +133,21 @@ class Search extends React.Component {
           <Col span={24}>
             <Table
               columns={ this.columns() }
+              dataSource={ this.state.tableData }
               scroll={{ x: false, y: false }} />
           </Col>
-        </Row>
+
+          <Modal
+            title="Detail Content"
+            visible={this.state.visible}
+            onOk={this.handleOk}
+            onCancel={this.handleCancel}
+            style={{ top: '20px', width: '100%' }}
+            width={'70%'}
+          >
+            {this.state.content}
+          </Modal>
+        </Row>  
       </Content>
     )
   }

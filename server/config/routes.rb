@@ -9,6 +9,10 @@ Rails.application.routes.draw do
         get :request_date, to: "request_date"
         get :top_app, to: "top_app"
       end
+
+      namespace :search do
+        get :search_request, to: "search_request"
+      end
     end
   end
 
