@@ -25,18 +25,8 @@ function onChange(value, dateString) {
 }
 
 function onOk(value) {
-  console.log('onOk: ', value);
+  this.loadChartData(value[0].format('YYYY-MM-DD'), value[1].format('YYYY-MM-DD'));
 }
-
-const rangePicker = <RangePicker
-  showTime={{ format: 'HH:mm' }}
-  format="YYYY-MM-DD HH:mm"
-  placeholder={['Start Time', 'End Time']}
-  onChange={onChange}
-  onOk={onOk}
-  defaultValue={[moment().startOf('month'), moment()]}
-  format="YYYY-MM-DD"
-/>
 
 const spin = <Spin />;
 
@@ -58,7 +48,20 @@ export default class Dashboard extends React.Component {
       columns: this.columns(),
       topApp: []
     }
+
+    this.onChange = onChange;
+    this.onOk = onOk;
   }
+
+  rangePicker = <RangePicker
+    showTime={{ format: 'HH:mm' }}
+    format="YYYY-MM-DD HH:mm"
+    placeholder={['Start Time', 'End Time']}
+    onChange={onChange.bind(this)}
+    onOk={onOk.bind(this)}
+    defaultValue={[moment().startOf('month'), moment()]}
+    format="YYYY-MM-DD"
+  />
 
   loadData = () => {
     axios.get('http://localhost:3000/api/v1/dashboards/table_request.json')
@@ -78,7 +81,23 @@ export default class Dashboard extends React.Component {
         }
       })
 
-    axios.get('http://localhost:3000/api/v1/dashboards/chart_number_requests.json')
+    // axios.get('http://localhost:3000/api/v1/dashboards/chart_number_requests.json')
+    //   .then((res) => {
+    //     if (res.status == 200) {
+    //       this.setState({chartData: res.data});
+    //     }
+    //   })
+
+    // axios.get('http://localhost:3000/api/v1/dashboards/top_app.json')
+    //   .then((res) => {
+    //     if (res.status == 200) {
+    //       this.setState({topApp: res.data});
+    //     }
+    //   })
+  }
+
+  loadChartData = (startDate, endDate) => {
+    axios.get(`http://localhost:3000/api/v1/dashboards/chart_number_requests.json?start_date=${startDate}&end_date=${endDate}`)
       .then((res) => {
         if (res.status == 200) {
           this.setState({chartData: res.data});
@@ -95,6 +114,7 @@ export default class Dashboard extends React.Component {
 
   componentWillMount() {
     this.loadData();
+    this.loadChartData('', '');
   }
 
   componentDidUpdate() {
@@ -244,7 +264,7 @@ export default class Dashboard extends React.Component {
         </Row>
 
         <Content>
-          <Tabs defaultActiveKey="1" tabBarExtraContent={rangePicker} >
+          <Tabs defaultActiveKey="1" tabBarExtraContent={this.rangePicker} >
             <TabPane tab="Chart" key="1" >
               { !this.state.chartData ? spin :
                 <Row>

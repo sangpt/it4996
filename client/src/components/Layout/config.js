@@ -35,6 +35,7 @@ const router = {
   terms: '/terms',
   recruitment: '/recruitment',
   apps: '/apps',
+  search: '/search',
 };
 
 export { router, routeIcons, menu };

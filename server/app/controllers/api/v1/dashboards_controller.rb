@@ -35,7 +35,7 @@ class Api::V1::DashboardsController < ApplicationController
   attr_accessor :requests
 
   def requests
-    return client.requests unless params[:start_date] && params[:end_date]
+    return client.requests.from_beginning_of_month if params[:start_date].blank? && params[:end_date].blank?
     start_date = Date.new(*params[:start_date].split("-").map(&:to_i))
     end_date = Date.new(*params[:end_date].split("-").map(&:to_i))
     @requests = (client.requests.between_date(start_date, end_date) || client.requests.from_beginning_of_month)
