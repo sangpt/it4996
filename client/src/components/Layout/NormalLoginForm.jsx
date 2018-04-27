@@ -15,6 +15,7 @@ class NormalLoginForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         this.getAccessToken();
+        localStorage.setItem('email', values.email)
       }
     });
   }
@@ -27,8 +28,9 @@ class NormalLoginForm extends React.Component {
         if (res.status === 200) {
           console.log(res.data);
           // document.cookie = `access_token=${res.data.access_token};user_id=${res.data.user_id}`;
-          localStorage.setItem('access_token', res.data.access_token);
-          localStorage.setItem('user_id', res.data.user_id);
+          // localStorage.setItem('access_token', res.data.access_token);
+          // localStorage.setItem('user_id', res.data.user_id);
+          localStorage.setItem('user_info', JSON.stringify(res.data));
           this.storeAccessToken(res.data);
         }
       })
