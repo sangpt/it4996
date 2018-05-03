@@ -13,6 +13,11 @@ Rails.application.routes.draw do
       namespace :search do
         get :search_request, to: "search_request"
       end
+
+      namespace :apps do
+        get :index, to: "index"
+        post :destroy, to: "destroy"
+      end
     end
   end
 

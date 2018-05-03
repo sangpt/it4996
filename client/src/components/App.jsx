@@ -10,13 +10,14 @@ import { router } from './Layout/config';
 import axios from 'axios';
 import Search from './routes/search';
 import createHistory from "history/createBrowserHistory";
+import Apps from './routes/apps';
 
 const history = createHistory();
 const {
     home,
     socialNetworks, sponsors, introductContent,
     staffs, policies, terms,
-    intent, recruitment, search,
+    intent, recruitment, search, apps,
   } = router;
 
 class App extends React.Component {
@@ -30,13 +31,14 @@ class App extends React.Component {
   }
 
   getAccessToken = () => {
-    return localStorage.getItem('access_token');
+    if (localStorage.getItem('user_info'))
+      return JSON.parse(localStorage.getItem('user_info')).access_token;
   }
 
   authorize = () => {
     let loggedIn = false;
     let data = {
-      access_token: localStorage.getItem('access_token'),
+      access_token: this.getAccessToken(),
     };
     axios.get('http://localhost:3000/sessions', {params: data})
       .then((res) => {
@@ -58,6 +60,7 @@ class App extends React.Component {
       <Switch>
         <Route exact path={home} component={Dashboard} />
         <Route path={search} component={Search} />
+        <Route path={apps} component={Apps} />
       </Switch>
     </MainLayout>
   );
@@ -71,8 +74,7 @@ class App extends React.Component {
   };
 
   handleLogout() {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('user_id');
+    localStorage.removeItem('user_info');
     this.setState({loggedIn: false});
   }
 

@@ -51,7 +51,7 @@ class GlobalHeader extends PureComponent {
       onCollapse
     } = this.props;
     const currentUser = {
-      name: 'Sang Pham'
+      email: localStorage.getItem('email')
     }
     const menu = (
       <Menu className="menu">
@@ -81,7 +81,7 @@ class GlobalHeader extends PureComponent {
           <Dropdown overlay={menu}>
             <span className="action account">
               <Avatar size="small" className="avatar" src={logo} />
-              <span className="name">{currentUser.name}</span>
+              <span className="name">{currentUser.email}</span>
             </span>
           </Dropdown>
         </div>
