@@ -4,6 +4,7 @@ const autoprefixer = require('autoprefixer');
 const path = require('path');
 
 const port = 8080;
+const host = '0.0.0.0';
 
 module.exports = {
   entry: './src/index.jsx',
@@ -49,6 +50,7 @@ module.exports = {
 
   devServer: {
     inline: true,
+    host,
     port,
     contentBase: './build',
     hot: true,
