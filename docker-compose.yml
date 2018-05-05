@@ -9,21 +9,27 @@ services:
       - MONGO_DATA_DIR=/data/db
       - MONGO_LOG_DIR=/dev/null
     container_name: db
-  # redis:
-  #   image: redis
-  #   ports:
-  #     - "6479:6379"
   web:
     build:
       context: .
       dockerfile: Dockerfile-web
-    # command: bundle exec rails s -p 3000 -b "0.0.0.0"
+    command: bash -c "rm -rf ./tmp/pids/server.pid && bundle exec rails s -p 3000 -b 0.0.0.0"
     container_name: web
     tty: true
     volumes:
-      - .:/server
+      - ./server:/server
     ports:
       - 3000:3000
     depends_on:
       - db
-      # - redis
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile-client
+    command: npm run dev
+    container_name: client
+    tty: true
+    volumes:
+     - ./client:/client
+    ports:
+     - 8080:8080

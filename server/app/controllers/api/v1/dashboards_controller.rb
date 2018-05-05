@@ -1,7 +1,6 @@
 class Api::V1::DashboardsController < ApplicationController
   def top_title
-    @this_months_requests = requests.from_beginning_of_month
-    @form = ::DashboardForm.new @this_months_requests
+    @form = ::DashboardForm.new requests
   end
 
   def chart_number_requests
