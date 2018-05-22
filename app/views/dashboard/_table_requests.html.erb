@@ -23,7 +23,7 @@
         <td><%= a - b %></td>
         <td><%= requests.map(&:duration).reduce(:+).to_i / requests.count %></td>
         <td><%= requests.map(&:number_of_words).reduce(:+) %></td>
-        <td>View</td>
+        <td><%= link_to "View", requests_path(date: date) %></td>
       </tr>
     <% end %>
   </tbody>

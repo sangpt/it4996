@@ -7,10 +7,8 @@ class Request
   belongs_to :app
 
   field :device_id, type: String
-  field :content, type: String
   field :start_time, type: DateTime
   field :end_time, type: DateTime
-  field :input_text, type: Array
   field :voice_name, type: String
   field :input_type, type: String
   field :output_type, type: String
@@ -38,7 +36,7 @@ class Request
   end
   scope :today, -> {where(:start_time.gte => Time.zone.now.beginning_of_day.to_i*1000)}
   scope :in_date, ->(date){
-    where(:start_time => date.beginning_of_day.to_i*1000..date.end_of_day.to_i*1000)
+    where(:start_time => date.beginning_of_day..date.end_of_day)
   }
   scope :between_date, ->(start_date, end_date) do
     where(:start_time => start_date.beginning_of_day.to_i*1000..end_date.end_of_day.to_i*1000)

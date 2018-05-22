@@ -22,7 +22,7 @@ class DashboardForm
   end
 
   def average_duration
-    requests.nil? ? 0 : requests.avg(:duration).to_i
+    requests.nil? ? 0 : requests.success.avg(:duration).to_i
   end
 
   def average_per_word

@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   resources :dashboard
   resources :apps
+  resources :requests
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
