@@ -1,8 +1,0 @@
-FROM node
-
-RUN mkdir /client
-WORKDIR /client
-
-ADD ./client /client
-
-RUN npm install

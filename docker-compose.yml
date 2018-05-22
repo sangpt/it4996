@@ -17,19 +17,8 @@ services:
     container_name: web
     tty: true
     volumes:
-      - ./server:/server
+      - .:/server
     ports:
       - 3000:3000
     depends_on:
       - db
-  client:
-    build:
-      context: .
-      dockerfile: Dockerfile-client
-    command: npm run dev
-    container_name: client
-    tty: true
-    volumes:
-     - ./client:/client
-    ports:
-     - 8080:8080
