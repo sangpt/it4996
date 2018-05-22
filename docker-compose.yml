@@ -13,7 +13,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-web
-    command: bash -c "rm -rf ./tmp/pids/server.pid && bundle exec rails s -p 3000 -b 0.0.0.0"
+    # command: bash -c "rm -rf ./tmp/pids/server.pid && bundle exec rails s -p 3000 -b 0.0.0.0"
     container_name: web
     tty: true
     volumes:
