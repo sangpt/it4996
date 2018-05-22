@@ -1,5 +1,7 @@
-<div id="chart_number_requests">
+<% a = data.values.map &:count %>
+<% b = data.values.map{|requests| requests.select(&:success?).count} %>
 
+<div id="chart_number_requests">
 </div>
 
 <script type="text/javascript">
@@ -9,7 +11,7 @@
           type: 'column'
       },
       title: {
-          text: 'Number of Requests chart'
+          text: 'Requests chart'
       },
       subtitle: {
         text: 'From this month'
@@ -18,18 +20,35 @@
           categories: <%= data.keys.map(&:to_s).to_s.html_safe %>,
           crosshair: true
       },
-      yAxis: {
-          min: 0,
+      yAxis: [
+        {
+          labels: {
+            format: '{value} requests',
+            style: {
+              color: Highcharts.getOptions().colors[1]
+            }
+          },
           title: {
-              text: 'Requests'
+            text: 'Requests',
+            color: Highcharts.getOptions().colors[1]
           }
-      },
+        },
+        {
+          labels: {
+            format: '{value}%',
+            style: {
+              color: Highcharts.getOptions().colors[0]
+            }
+          },
+          title: {
+            text: 'Percent Success',
+            color: Highcharts.getOptions().colors[0]
+          },
+          opposite: true
+        }
+      ],
       tooltip: {
-          headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-          pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' + '<td style="padding:0"><b>{point.y:.1f} requests</b></td></tr>',
-          footerFormat: '</table>',
-          shared: true,
-          useHTML: true
+          shared: true
       },
       plotOptions: {
           column: {
@@ -40,7 +59,21 @@
       series: [
         {
           name: 'Number of requests',
-          data: <%= data.values.map &:count %>
+          type: 'column',
+          yAxis: 0,
+          data: <%= a %>,
+          tooltip: {
+            valueSuffix: ' requests'
+          }
+        },
+        {
+          name: 'Percent success',
+          type: 'spline',
+          yAxis: 1,
+          data: <%= a.each_with_index.map {|value, i| (b[i].to_f / a[i].to_f * 100).to_i} %>,
+          tooltip: {
+            valueSuffix: ' %'
+          }
         }
       ]
     });
