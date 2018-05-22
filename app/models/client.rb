@@ -4,6 +4,8 @@ class Client
 
   has_many :apps
   has_many :users
+  has_many :pay_histories
+  has_many :units
   # has_many :units
 
   # field :username, type: String

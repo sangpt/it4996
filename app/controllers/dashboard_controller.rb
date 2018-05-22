@@ -2,8 +2,10 @@ class DashboardController < ApplicationController
   def index
     @data = client.requests.group_by{|request| request.start_time.to_date}.sort.to_h
     @form = ::DashboardForm.new requests.from_beginning_of_month
+    @top_app = client.apps.inject({}){|hash, app| hash.merge(app.id.to_s => [app.name, app.requests.from_beginning_of_month.count])}
+      .sort_by{|app| app.last.last}.reverse.first(5)
   rescue
-    @data = {}
+
   end
 
   private

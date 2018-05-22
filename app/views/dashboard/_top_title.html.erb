@@ -2,7 +2,7 @@
 <div class="row tile_count">
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
     <span class="count_top">
-      <i class="fa fa-user"></i>
+      <i class="fa fa-database"></i>
       Total Request</span>
     <div class="count"><%= @form.total_requests %></div>
     <span class="count_bottom">
@@ -11,45 +11,45 @@
   </div>
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
     <span class="count_top">
-      <i class="fa fa-clock-o"></i>
+      <i class="fa fa-check"></i>
       Success</span>
-    <div class="count"><%= @form.total_request_success %></div>
+    <div class="count green"><%= @form.total_request_success %></div>
     <span class="count_bottom">
       From this month
     </span>
   </div>
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
     <span class="count_top">
-      <i class="fa fa-user"></i>
+      <i class="fa fa-close"></i>
       Error</span>
-    <div class="count green"><%= @form.total_requests_error %></div>
+    <div class="count red"><%= @form.total_requests_error %></div>
     <span class="count_bottom">
       From this month
     </span>
   </div>
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
     <span class="count_top">
-      <i class="fa fa-user"></i>
+      <i class="fa fa-clock-o"></i>
       Average Time</span>
-    <div class="count"><%= @form.average_duration %></div>
+    <div class="count aero"><%= @form.average_duration %></div>
     <span class="count_bottom">
       From this month
     </span>
   </div>
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
     <span class="count_top">
-      <i class="fa fa-user"></i>
+      <i class="fa fa-file-word-o"></i>
       Total Words</span>
-    <div class="count"><%= @form.total_words %></div>
+    <div class="count purple"><%= @form.total_words %></div>
     <span class="count_bottom">
       From this month
     </span>
   </div>
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
     <span class="count_top">
-      <i class="fa fa-user"></i>
-      Total Connections</span>
-    <div class="count">7,325</div>
+      <i class="fa fa-money"></i>
+      Total Amount not pay</span>
+    <div class="count dark">7,325</div>
     <span class="count_bottom">
       From this month
     </span>

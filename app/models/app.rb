@@ -5,7 +5,7 @@ class App
 
   belongs_to :client
   belongs_to :service
-  has_many :requests
+  has_many :requests, dependent: :destroy
   # has_many :requests, class_name: Request.name, inverse_of: :app_id
   field :app_id, type: String
   field :name, type: String
