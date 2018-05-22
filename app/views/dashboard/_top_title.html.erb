@@ -1,0 +1,58 @@
+<!-- top tiles -->
+<div class="row tile_count">
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top">
+      <i class="fa fa-user"></i>
+      Total Request</span>
+    <div class="count"><%= @form.total_requests %></div>
+    <span class="count_bottom">
+      From this month
+    </span>
+  </div>
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top">
+      <i class="fa fa-clock-o"></i>
+      Success</span>
+    <div class="count"><%= @form.total_request_success %></div>
+    <span class="count_bottom">
+      From this month
+    </span>
+  </div>
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top">
+      <i class="fa fa-user"></i>
+      Error</span>
+    <div class="count green"><%= @form.total_requests_error %></div>
+    <span class="count_bottom">
+      From this month
+    </span>
+  </div>
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top">
+      <i class="fa fa-user"></i>
+      Average Time</span>
+    <div class="count"><%= @form.average_duration %></div>
+    <span class="count_bottom">
+      From this month
+    </span>
+  </div>
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top">
+      <i class="fa fa-user"></i>
+      Total Words</span>
+    <div class="count"><%= @form.total_words %></div>
+    <span class="count_bottom">
+      From this month
+    </span>
+  </div>
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top">
+      <i class="fa fa-user"></i>
+      Total Connections</span>
+    <div class="count">7,325</div>
+    <span class="count_bottom">
+      From this month
+    </span>
+  </div>
+</div>
+<!-- /top tiles -->

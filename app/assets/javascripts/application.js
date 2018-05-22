@@ -13,5 +13,11 @@
 //= require jquery2
 //= require bootstrap-sprockets
 //= require rails-ujs
-//= require turbolinks
+//= turbolinks
 //= require gentelella
+
+$(function() {
+  setTimeout(function(){
+    $('#flash').slideUp();
+  }, 5000);
+});

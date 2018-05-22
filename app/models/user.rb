@@ -7,7 +7,7 @@ class User
 
 	belongs_to :client
 
-	field :username, type: String
+	field :name, type: String
   field :email, type: String, default: ""
   field :encrypted_password, type: String, default: ""
 

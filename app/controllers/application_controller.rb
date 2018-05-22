@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
+  before_action :verify_context_user!, unless: :devise_controller?
+
   layout :layout_by_resource
 
   private
@@ -18,5 +20,9 @@ class ApplicationController < ActionController::Base
     else
       root_path
     end
+  end
+
+  def verify_context_user!
+    redirect_to new_user_session_path unless current_user
   end
 end

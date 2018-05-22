@@ -1,0 +1,48 @@
+<div id="chart_number_requests">
+
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    Highcharts.chart('chart_number_requests', {
+      chart: {
+          type: 'column'
+      },
+      title: {
+          text: 'Number of Requests chart'
+      },
+      subtitle: {
+        text: 'From this month'
+      },
+      xAxis: {
+          categories: <%= data.keys.map(&:to_s).to_s.html_safe %>,
+          crosshair: true
+      },
+      yAxis: {
+          min: 0,
+          title: {
+              text: 'Requests'
+          }
+      },
+      tooltip: {
+          headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+          pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' + '<td style="padding:0"><b>{point.y:.1f} requests</b></td></tr>',
+          footerFormat: '</table>',
+          shared: true,
+          useHTML: true
+      },
+      plotOptions: {
+          column: {
+              pointPadding: 0.2,
+              borderWidth: 0
+          }
+      },
+      series: [
+        {
+          name: 'Number of requests',
+          data: <%= data.values.map &:count %>
+        }
+      ]
+    });
+  });
+</script>

@@ -2,12 +2,16 @@ class Client
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  has_many :apps
+  has_many :users
+  # has_many :units
+
   # field :username, type: String
   field :name, type: String
   # field :email, type: String
   field :email, type: String, default: ""
   field :encrypted_password, type: String, default: ""
-  field :access_token, type: String, default: ""
+  field :credit, type: Float
 
   ## Recoverable
   field :reset_password_token,   type: String
@@ -29,12 +33,8 @@ class Client
   # has_many :requests
   # has_many :apps, class_name: App.name, inverse_of: :client_id
 
-  def apps
-    App.where(client_id: client_id) if client_id
-  end
-
   def requests
-    Request.where(:app_id.in => apps.pluck(:app_id)) if apps
+    Request.where(:app.in => apps.pluck(:id)) if apps
   end
 
   class << self

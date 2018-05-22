@@ -18,7 +18,7 @@ class DashboardForm
   end
 
   def total_requests_error
-    requests.nil? ? 0 : requests.error.count
+    requests.nil? ? 0 : requests.size - total_request_success
   end
 
   def average_duration

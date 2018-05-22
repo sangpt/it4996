@@ -1,0 +1,36 @@
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field col-md-7 col-xs-12">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, class: "form-control", disabled: true %>
+  </div>
+
+  <div class="field col-md-7 col-xs-12">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true, class: "form-control" %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field col-md-7 col-xs-12">
+    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div class="field col-md-7 col-xs-12">
+    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+    <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div class="field col-md-7 col-xs-12">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div class="actions col-md-7 col-xs-12" style="margin-top: 12px">
+    <%= f.submit "Update", class: "btn btn-success" %>
+  </div>
+<% end %>
