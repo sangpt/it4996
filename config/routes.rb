@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   #   end
   # end
 
-  root "dashboard#index"
+  # root "dashboard#index"
 
   resources :dashboard
   resources :apps
@@ -32,4 +32,18 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     registrations: 'users/registrations'
   }
+
+  devise_for :accountants, controllers: {
+    sessions: 'accountants/sessions',
+    registrations: 'accountants/registrations'
+  }
+
+  authenticated :user do
+    root "dashboard#index"
+  end
+
+  authenticated :accountant do
+    root "accountants/charges#index"
+    resources :charges
+  end
 end

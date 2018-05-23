@@ -21,11 +21,21 @@
         dataType: 'json',
         data: params,
         success: function(data) {
+          $('.unit').text(data.unit);
+          $('.price_per_unit').text(data.price);
           $('.quantity').text(data.quantity);
-          $('.pricee').text(data.total);
+          $('.total').text(data.total);
+          $('.cash').text(data.cash);
+          $('.after_credit').text(data.after_credit);
+          $('.message').text(data.message);
+          $('.message').removeClass('hidden');
+          if (data.message == "") {
+            $('.message').addClass('hidden');
+          }
           $('.table-requests').html(data.content);
           drawDatatable();
           $('.detail').removeClass('hidden');
+          $('.amount').removeClass('hidden');
           $(this).prop('disabled', false);
           $(this).text('Submit');
         }.bind(this)

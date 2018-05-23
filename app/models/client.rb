@@ -13,7 +13,7 @@ class Client
   # field :email, type: String
   field :email, type: String, default: ""
   field :encrypted_password, type: String, default: ""
-  field :credit, type: Float
+  field :credit, type: Float, default: 0
 
   ## Recoverable
   field :reset_password_token,   type: String

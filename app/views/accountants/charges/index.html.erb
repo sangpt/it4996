@@ -1,0 +1,77 @@
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="clearfix"></div>
+  <div class="">
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Pay</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <div class="row">
+              <div class="col-md-6 col-xs-12">
+                <%= render "form" %>
+              </div>
+
+              <div class="col-md-1">
+
+              </div>
+
+              <div class="col-md-5 col-xs-12 hidden amount">
+                <p class="lead">Amount</p>
+                <div class="table-responsive">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <th>Unit:</th>
+                        <td class="unit"></td>
+                      </tr>
+                      <tr>
+                        <th>Price per unit:</th>
+                        <td class="price_per_unit"></td>
+                      </tr>
+                      <tr>
+                        <th>Quantity</th>
+                        <td class="quantity"></td>
+                      </tr>
+                      <tr>
+                        <th>Total:</th>
+                        <td class="total"><strong></strong></td>
+                      </tr>
+                      <tr>
+                        <th>Cash:</th>
+                        <td class="cash"></td>
+                      </tr>
+                      <tr>
+                        <th>Credit after charge:</th>
+                        <td class="after_credit"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p class="red message">
+                  
+                </p>
+                <button type="button" name="button" class="btn btn-primary pull-right">Charge</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="x_panel detail hidden" style="height: 100%">
+          <div class="x_content table-requests">
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<%= render "javascript" %>
+
+<!-- /page content -->

@@ -49,6 +49,9 @@ class Request
   scope :is_not_paid, -> do
     where(:is_paid => false)
   end
+  scope :of_client, ->(client_id) do
+    where :app_id.in => App.where(client_id: client_id).pluck(:id)
+  end
 
   def success?
     status == 1
