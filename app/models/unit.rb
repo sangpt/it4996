@@ -3,8 +3,9 @@ class Unit
   include Mongoid::Timestamps
   include Mongoid::Paranoia
 
-  belongs_to :client
-  belongs_to :service
+  # belongs_to :client
+  # belongs_to :service
+  has_many :pay_histories
 
   field :type, type: String
   field :price, type: Float

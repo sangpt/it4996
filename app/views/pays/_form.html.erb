@@ -1,0 +1,43 @@
+<%= form_tag pays_path, method: :post, class: "form-horizontal form-label-left" do %>
+  <div class="row">
+    <div class="form-group">
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <%= label_tag :start_date, nil, class: "control-label" %>
+        <div class="input-prepend input-group">
+          <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
+          <%= text_field_tag :start_date, nil, class: "form-control monthpicker" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <%= label_tag :end_date, nil, class: "control-label" %>
+        <div class="input-prepend input-group">
+          <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
+          <%= text_field_tag :end_date, nil, class: "form-control monthpicker" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <%= label_tag :unit, nil, class: "control-label" %>
+        <%= select_tag :unit, options_for_select(Unit.all.collect{|unit| ["Via #{unit.type} (#{unit.price} per #{unit.type})", unit.id]}), class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group clearfix">
+      <div class="col-md-6 col-xs-12">
+        <%= check_box_tag :show_all, true, false, class: "js-switch" %>
+        <%= label_tag :show_all, "Show paid requests", class: "control-label" %>
+      </div>
+    </div>
+
+    <div class="form-group" style="margin-top: 12px;">
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <%= button_tag "Submit", type: :submit, class: "btn btn-success submit" %>
+      </div>
+    </div>
+  </div>
+<% end %>

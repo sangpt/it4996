@@ -23,30 +23,34 @@ class Request
   field :number_of_words, type: Integer
   field :service_name, type: String
   field :origin_text, type: String
+  field :is_paid, type: Boolean, default: false
 
   search_in *attribute_names
 
   scope :success, -> do
-    # where(:start_time.ne => nil, :end_time.ne => nil)
     where(status: 1)
   end
   scope :error, -> do
-    # any_of({start_time: nil}, {end_time: nil})
     where(status: 2)
   end
-  scope :today, -> {where(:start_time.gte => Time.zone.now.beginning_of_day.to_i*1000)}
+  scope :today, -> {where(:start_time.gte => Time.zone.now.beginning_of_day)}
   scope :in_date, ->(date){
     where(:start_time => date.beginning_of_day..date.end_of_day)
   }
   scope :between_date, ->(start_date, end_date) do
-    where(:start_time => start_date.beginning_of_day.to_i*1000..end_date.end_of_day.to_i*1000)
+    where(:start_time => start_date.beginning_of_day..end_date.end_of_day)
   end
   scope :from_beginning_of_month, -> do
     where(:start_time => Time.zone.now.beginning_of_month..Time.zone.now.end_of_day)
   end
+  scope :is_paid, -> do
+    where(:is_paid => true)
+  end
+  scope :is_not_paid, -> do
+    where(:is_paid => false)
+  end
 
   def success?
-    # !(start_time == nil || end_time == nil)
     status == 1
   end
 

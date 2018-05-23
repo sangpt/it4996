@@ -13,6 +13,7 @@
       <th>Output Type</th>
       <th>Number of Words</th>
       <th>Origin Text</th>
+      <th>Is Paid?</th>
     </tr>
   </thead>
   <tbody>
@@ -30,6 +31,13 @@
         <td><%= request.output_type %></td>
         <td><%= request.number_of_words %></td>
         <td><%= request.origin_text %></td>
+        <td>
+          <% if request.is_paid %>
+            <span class="label label-success">PAID</span>
+          <% else %>
+            <span class="label label-danger">NOT PAID</span>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
