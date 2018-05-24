@@ -18,6 +18,8 @@ class ApplicationController < ActionController::Base
       new_user_session_path
     elsif resource_or_scope == :accountant
       new_accountant_session_path
+    elsif resource_or_scope == :admin
+      new_admin_session_path
     else
       root_path
     end

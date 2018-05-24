@@ -5,6 +5,7 @@ class Request
   include Mongoid::Paranoia
 
   belongs_to :app
+  belongs_to :pay_history
 
   field :device_id, type: String
   field :start_time, type: DateTime

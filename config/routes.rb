@@ -38,6 +38,10 @@ Rails.application.routes.draw do
     registrations: 'accountants/registrations'
   }
 
+  devise_for :admins, controllers: {
+    sessions: 'admins/sessions'
+  }
+
   authenticated :user do
     root "dashboard#index"
   end
@@ -45,5 +49,9 @@ Rails.application.routes.draw do
   authenticated :accountant do
     root "accountants/charges#index"
     resources :charges
+  end
+
+  authenticated :admin do
+    mount RailsAdmin::Engine => '/', as: 'rails_admin'
   end
 end
