@@ -23,13 +23,14 @@ class Accountants::ChargesController < ApplicationController
 
     @requests.update_all is_paid: true
     PayHistory.create unit: @unit, start_date: params[:start_date], end_date: params[:end_date],
-      total: total, client: client, cash: cash, credit: current_credit, after_credit: after_credit
+      total: total, client: client, cash: cash, credit: current_credit, after_credit: after_credit,
+      quantity: quantity
     client.update_attributes credit: after_credit
 
     render json: {
       status: :success,
       client_name: client.name,
-      num: @requests.is_not_paid.count,
+      num: quantity,
       total: total
     }
   end

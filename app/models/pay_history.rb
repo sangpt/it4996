@@ -9,7 +9,7 @@ class PayHistory
 
   field :start_date, type: Date
   field :end_date, type: Date
-  field :type, type: String
+  field :quantity, type: Float
   field :total, type: Float
   field :cash, type: Float
   field :credit, type: Float

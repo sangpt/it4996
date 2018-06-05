@@ -49,6 +49,9 @@ Rails.application.routes.draw do
   authenticated :accountant do
     root "accountants/charges#index"
     post '/charges', to: "accountants/charges#create"
+    namespace :accountants do
+      resources :pay_histories
+    end
   end
 
   authenticated :admin do
