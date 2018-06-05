@@ -19,7 +19,11 @@
             <% end %></li>
           </ul>
         </li>
-
+        <% if context_user %>
+          <li>
+            <a href="javascript:void(0)">Credit: <%= current_user.client.credit.to_i %></a>
+          </li>
+        <% end %>
       </ul>
     </nav>
   </div>

@@ -5,8 +5,6 @@ class ApplicationController < ActionController::Base
 
   layout :layout_by_resource
 
-  private
-
   def layout_by_resource
     return "application" if current_user
     return "accountant" if current_accountant

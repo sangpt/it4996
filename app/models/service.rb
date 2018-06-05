@@ -4,7 +4,7 @@ class Service
 
   has_many :apps
   has_many :units
-  has_many :pay_histories
+  # has_many :pay_histories
 
   field :name, type: String
 end

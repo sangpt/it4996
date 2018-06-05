@@ -7,4 +7,8 @@ module ApplicationHelper
     when "alert", "warning" then "alert-warning"
     end
   end
+
+  def context_user
+    current_user || current_accountant
+  end
 end

@@ -48,7 +48,7 @@ Rails.application.routes.draw do
 
   authenticated :accountant do
     root "accountants/charges#index"
-    resources :charges
+    post '/charges', to: "accountants/charges#create"
   end
 
   authenticated :admin do
