@@ -9,6 +9,10 @@ class DashboardForm
     requests.nil? ? 0 : requests.size
   end
 
+  def total_characters
+    requests.nil? ? 0 : requests.reduce(0) {|sum, req| sum += req.origin_text.length}
+  end
+
   def total_words
     requests.nil? ? 0 : requests.sum(:number_of_words)
   end

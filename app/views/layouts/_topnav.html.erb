@@ -21,7 +21,7 @@
         </li>
         <% if context_user %>
           <li>
-            <a href="javascript:void(0)">Credit: <%= current_user.client.credit.to_i %></a>
+              <a href="javascript:void(0)"><strong><i class="fa fa-money"></i> Credit: <%= current_user.client.credit.to_i %> đ</strong></a>
           </li>
         <% end %>
       </ul>

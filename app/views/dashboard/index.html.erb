@@ -1,17 +1,35 @@
 <!-- page content -->
 <div class="right_col" role="main">
-  <%= render "top_title" %>
   <div class="">
     <div class="clearfix"></div>
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
+            <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+              <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+              <span>Loading...</span> <b class="caret"></b>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <%= render "top_title" %>
+          </div>
+        </div>
+
+        <div class="x_panel">
+          <div class="x_title">
             <h2>Request Chart</h2>
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <%= render "chart_number_requests", data: @data %>
+            <% if @data.empty? %>
+              <div class="text-center">
+                <h3>No data</h3>
+              </div>
+            <% else %>
+              <%= render "chart_number_requests", data: @data %>
+            <% end %>
           </div>
         </div>
 

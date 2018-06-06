@@ -6,7 +6,7 @@
       Total Request</span>
     <div class="count"><%= @form.total_requests %></div>
     <span class="count_bottom">
-      From this month
+      requests
     </span>
   </div>
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
@@ -15,7 +15,7 @@
       Success</span>
     <div class="count green"><%= @form.total_request_success %></div>
     <span class="count_bottom">
-      From this month
+      requests
     </span>
   </div>
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
@@ -24,7 +24,7 @@
       Error</span>
     <div class="count red"><%= @form.total_requests_error %></div>
     <span class="count_bottom">
-      From this month
+      requests
     </span>
   </div>
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
@@ -33,7 +33,7 @@
       Average Time</span>
     <div class="count aero"><%= @form.average_duration %></div>
     <span class="count_bottom">
-      From this month
+      seconds
     </span>
   </div>
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
@@ -42,16 +42,16 @@
       Total Words</span>
     <div class="count purple"><%= @form.total_words %></div>
     <span class="count_bottom">
-      From this month
+      words
     </span>
   </div>
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
     <span class="count_top">
-      <i class="fa fa-money"></i>
-      Total Amount not pay</span>
-    <div class="count dark">7,325</div>
+      <i class="fa fa-github"></i>
+      Total Characters</span>
+    <div class="count dark"><%= @form.total_characters %></div>
     <span class="count_bottom">
-      From this month
+      characters
     </span>
   </div>
 </div>
