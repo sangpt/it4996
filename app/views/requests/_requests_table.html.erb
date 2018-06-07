@@ -1,0 +1,44 @@
+<table id="datatable" class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th class="stt">#</th>
+      <th>Device ID</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Status</th>
+      <th>App Name</th>
+      <th>Voice Name</th>
+      <th>TTS Engine IP</th>
+      <th>Input Type</th>
+      <th>Output Type</th>
+      <th>Number of Words</th>
+      <th>Origin Text</th>
+      <th>Is Paid?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% requests.each do |request| %>
+      <tr>
+        <td></td>
+        <td><%= request.device_id %></td>
+        <td><%= request.start_time %></td>
+        <td><%= request.end_time %></td>
+        <td><%= request.status %></td>
+        <td><%= request.app.name %></td>
+        <td><%= request.voice_name %></td>
+        <td><%= request.tts_engine_ip %></td>
+        <td><%= request.input_type %></td>
+        <td><%= request.output_type %></td>
+        <td><%= request.number_of_words %></td>
+        <td><%= request.origin_text %></td>
+        <td>
+          <% if request.is_paid %>
+            <span class="label label-success">PAID</span>
+          <% else %>
+            <span class="label label-danger">NOT PAID</span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

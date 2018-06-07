@@ -5,91 +5,74 @@ namespace :db do
   task seed: :environment do
     puts "================== START =================="
     executed_time do
-      puts "Generating server..."
-      servers = []
-      100.times do
-        servers << {
-          server: FFaker::Internet.ip_v4_address,
-          database: FFaker::Internet.domain_word,
-          username: FFaker::Internet.user_name,
-          password: FFaker::Internet.password
-        }
-      end
-      Server.create servers
-
-      puts "Generating service and subservice..."
+      puts "Generating service..."
       services = []
-      20.times do
+      10.times do
         services << {
-          type: rand(3),
           name: FFaker::Company.name
         }
       end
       Service.create services
 
-      subservices = []
-      Service.all.each_with_index do |service, i|
-        subservices << {
-          name: "Subservice#{i}",
-          service_id: service.id
-        }
-      end
-      Subservice.create subservices
-
       puts "Generating client..."
-      all_service_ids = Service.all.pluck :id
       clients = []
-      clients << {name: 'Pham Tuan Sang', email: 'client@gmail.com',
-        password: '123123', service_ids: all_service_ids.shuffle.first(6)}
-      20.times do
+      1.times do
         clients << {
-          name: FFaker::Name.name,
-          email: FFaker::Internet.email,
-          password: FFaker::Internet.password,
-          service_ids: all_service_ids.shuffle.first(rand(1..5))
+          name: FFaker::Company.name,
+          credit: 100
         }
       end
       Client.create clients
 
+      puts "Generating user..."
+      users = []
+      Client.all.each do |client|
+        users << {
+          name: FFaker::Name.name,
+          email: FFaker::Internet.email,
+          password: FFaker::Internet.password,
+          client: client
+        }
+      end
+      User.create users
+
+      puts "Generating apps..."
+      clients = Client.all
+      apps = []
+      Service.all.each_with_index do |service, i|
+        apps << {
+          name: "App #{i}",
+          client: clients.sample,
+          service: service
+        }
+      end
+      App.create apps
+
       puts "Generating request..."
-      all_client_ids = Client.all.pluck :id
       requests = []
-      Subservice.all.each do |subservice|
-        10000.times do |i|
-          content = FFaker::Lorem.paragraph
+      App.all.each do |app|
+        500.times do |i|
+          origin_text = FFaker::Lorem.paragraph
           requests << {
-            content: content,
+            origin_text: origin_text,
             start_time: i.hours.ago,
             end_time: (i-1).hours.ago,
             input_type: ["voice", "text"].sample,
             output_type: ["audio", "text"].sample,
-            status: ["success", "error"].sample,
-            token_number: content.split.length,
+            status: [0, 1].sample,
+            number_of_words: origin_text.split.length,
             tts_engine_ip: FFaker::Internet.ip_v4_address,
             device_id: FFaker::Internet.ip_v4_address,
-            client_id: all_client_ids.sample,
-            subservice_id: subservice.id
+            app_id: app.id,
+            voice_name: "VOICE NAME"
           }
         end
       end
       Request.collection.insert_many requests
 
-      puts "Generating server_request..."
-      server_requests = []
-      all_server_ids = Server.all.pluck :id
-      Request.all.each do |request|
-        10.times do |i|
-          server_requests << {
-            server: all_server_ids.sample,
-            action: "Action#{i}"
-          }
-        end
-      end
-      ServerRequest.collection.insert_many server_requests
-
-      puts "Generating admin..."
-      Admin.create email: 'admin@gmail.com', password: '123123',
-        name: 'Admin'
+      # puts "Generating admin..."
+      # Admin.create email: 'admin@gmail.com', password: '123123',
+      #   name: 'Admin'
     end
     puts "================== END =================="
   end

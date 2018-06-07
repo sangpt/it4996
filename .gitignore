@@ -17,10 +17,3 @@
 /yarn-error.log
 
 .byebug_history
-/public/packs
-/public/packs-test
-/node_modules
-yarn-debug.log*
-yarn-error.log*
-.yarn-integrity
-lib/aes_keys/*.aes

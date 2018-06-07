@@ -1,0 +1,58 @@
+<!-- top tiles -->
+<div class="row tile_count">
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top">
+      <i class="fa fa-database"></i>
+      Total Request</span>
+    <div class="count"><%= @form.total_requests %></div>
+    <span class="count_bottom">
+      requests
+    </span>
+  </div>
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top">
+      <i class="fa fa-check"></i>
+      Success</span>
+    <div class="count green"><%= @form.total_request_success %></div>
+    <span class="count_bottom">
+      requests
+    </span>
+  </div>
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top">
+      <i class="fa fa-close"></i>
+      Error</span>
+    <div class="count red"><%= @form.total_requests_error %></div>
+    <span class="count_bottom">
+      requests
+    </span>
+  </div>
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top">
+      <i class="fa fa-clock-o"></i>
+      Average Time</span>
+    <div class="count aero"><%= @form.average_duration %></div>
+    <span class="count_bottom">
+      seconds
+    </span>
+  </div>
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top">
+      <i class="fa fa-file-word-o"></i>
+      Total Words</span>
+    <div class="count purple"><%= @form.total_words %></div>
+    <span class="count_bottom">
+      words
+    </span>
+  </div>
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top">
+      <i class="fa fa-github"></i>
+      Total Characters</span>
+    <div class="count dark"><%= @form.total_characters %></div>
+    <span class="count_bottom">
+      characters
+    </span>
+  </div>
+</div>
+<!-- /top tiles -->

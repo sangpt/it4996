@@ -5,8 +5,6 @@ class Admin
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  field :name, type: String
-
   ## Database authenticatable
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
@@ -35,10 +33,4 @@ class Admin
   # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
-
-  class << self
-    def test
-      find_by email: 'admin@gmail.com'
-    end
-  end
 end

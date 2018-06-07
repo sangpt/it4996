@@ -1,33 +1,38 @@
 class Request
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Search
+  include Mongoid::Paranoia
 
-  belongs_to :subservice
-  belongs_to :client
+  belongs_to :app
+  belongs_to :pay_history
+
   field :device_id, type: String
-  field :content, type: String
-  field :start_time, type: Time
-  field :end_time, type: Time
+  field :start_time, type: DateTime
+  field :end_time, type: DateTime
   field :voice_name, type: String
   field :input_type, type: String
   field :output_type, type: String
   field :sample_rate, type: String
   field :bit_rate, type: String
-  field :status, type: String
+  field :status, type: Integer
   field :message, type: String
   field :token_number, type: Integer
-  field :duration, type: Integer
+  field :duration, type: Float
   field :tts_engine_ip, type: String
-  field :is_streaming, type: Mongoid::Boolean
-  has_many :requests, class_name: ServerRequest.name
+  field :app_id, type: String
+  field :number_of_words, type: Integer
+  field :service_name, type: String
+  field :origin_text, type: String
+  field :is_paid, type: Boolean, default: false
+
+  search_in *attribute_names
 
   scope :success, -> do
-    # where(:start_time.ne => nil, :end_time.ne => nil)
-    where(status: "success")
+    where(status: 1)
   end
   scope :error, -> do
-    # any_of({start_time: nil}, {end_time: nil})
-    where(status: "error")
+    where(status: 2)
   end
   scope :today, -> {where(:start_time.gte => Time.zone.now.beginning_of_day)}
   scope :in_date, ->(date){
@@ -39,14 +44,21 @@ class Request
   scope :from_beginning_of_month, -> do
     where(:start_time => Time.zone.now.beginning_of_month..Time.zone.now.end_of_day)
   end
+  scope :is_paid, -> do
+    where(:is_paid => true)
+  end
+  scope :is_not_paid, -> do
+    where(:is_paid => false)
+  end
+  scope :of_client, ->(client_id) do
+    where :app_id.in => App.where(client_id: client_id).pluck(:id)
+  end
 
   def success?
-    # !(start_time == nil || end_time == nil)
-    status == "success"
+    status == 1
   end
 
   def error?
-    # !success?
-    status == "error"
+    !success?
   end
 end

@@ -1,0 +1,81 @@
+<% a = data.values.map &:count %>
+<% b = data.values.map{|requests| requests.select(&:success?).count} %>
+
+<div id="chart_number_requests">
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    Highcharts.chart('chart_number_requests', {
+      chart: {
+          type: 'column'
+      },
+      title: {
+          text: 'Requests chart'
+      },
+      subtitle: {
+        text: 'From this month'
+      },
+      xAxis: {
+          categories: <%= data.keys.map(&:to_s).to_s.html_safe %>,
+          crosshair: true
+      },
+      yAxis: [
+        {
+          labels: {
+            format: '{value} requests',
+            style: {
+              color: Highcharts.getOptions().colors[1]
+            }
+          },
+          title: {
+            text: 'Requests',
+            color: Highcharts.getOptions().colors[1]
+          }
+        },
+        {
+          labels: {
+            format: '{value}%',
+            style: {
+              color: Highcharts.getOptions().colors[0]
+            }
+          },
+          title: {
+            text: 'Percent Success',
+            color: Highcharts.getOptions().colors[0]
+          },
+          opposite: true
+        }
+      ],
+      tooltip: {
+          shared: true
+      },
+      plotOptions: {
+          column: {
+              pointPadding: 0.2,
+              borderWidth: 0
+          }
+      },
+      series: [
+        {
+          name: 'Number of requests',
+          type: 'column',
+          yAxis: 0,
+          data: <%= a %>,
+          tooltip: {
+            valueSuffix: ' requests'
+          }
+        },
+        {
+          name: 'Percent success',
+          type: 'spline',
+          yAxis: 1,
+          data: <%= a.each_with_index.map {|value, i| (b[i].to_f / a[i].to_f * 100).to_i} %>,
+          tooltip: {
+            valueSuffix: ' %'
+          }
+        }
+      ]
+    });
+  });
+</script>

@@ -1,0 +1,94 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.monthpicker').datepicker({
+      format: 'yyyy-mm-dd',
+      startView: 'days',
+      minViewMode: 'days',
+      autoclose: true
+    });
+
+    $(document).on('click', '.submit', function(event) {
+      event.preventDefault();
+      $(this).prop('disabled', true);
+      $(this).text('Loading...');
+      var form = $(this).closest('form');
+      var url = form.attr('action');
+      var params = form.serialize();
+
+      $.ajax({
+        url: url,
+        type: 'POST',
+        dataType: 'json',
+        data: params,
+        success: function(data) {
+          $('.unit').text(data.unit);
+          $('.price_per_unit').text(data.price);
+          $('.quantity').text(data.quantity);
+          $('.total').text(data.total);
+          $('.cash').text(data.cash);
+          $('.after_credit').text(data.after_credit);
+          $('.message').text(data.message);
+          $('.message').removeClass('hidden');
+          if (data.message == "") {
+            $('.message').addClass('hidden');
+          }
+          $('.table-requests').html(data.content);
+          drawDatatable();
+          $('.detail').removeClass('hidden');
+          $('.amount').removeClass('hidden');
+          $(this).prop('disabled', false);
+          $(this).text('Submit');
+        }.bind(this)
+      });
+
+    });
+  });
+
+  $(document).on('click', '.charge', function(event){
+    event.preventDefault();
+    var form = $('.form-charge');
+    var url = '/charges';
+    var params = form.serialize();
+
+    $.ajax({
+      url: url,
+      type: 'POST',
+      dataType: 'json',
+      data: params,
+      success: function(data) {
+        new PNotify({
+          title: 'Charge Successfully!',
+          text: `Client ${data.client_name} has charged ${data.num} requests for ${data.total}$ successfully!`,
+          type: 'success',
+          styling: 'bootstrap3',
+          hide: true
+        });
+      }.bind(this)
+    });
+  });
+
+  var drawDatatable = function() {
+    var t = $('#datatable').DataTable({
+      columnDefs: [
+        {searchable: false, orderable: false, targets: 0},
+        {orderable: false, targets: 'stt', width: '25px'},
+      ],
+      oLanguage: {
+        sSearch: 'Search'
+      },
+      order: [],
+      pageLength: 10,
+      destroy: true,
+      autoWidth: false,
+      processing: true
+    });
+
+    t.on('order.dt search.dt', function () {
+      var order_column = $('.bulk_action').length == 0 ? 0 : 1;
+
+      t.column(order_column, {search: 'applied', order: 'applied'}).nodes().each(function(cell, i) {
+        cell.innerHTML = i + 1;
+      });
+    }).draw();
+  }
+</script>

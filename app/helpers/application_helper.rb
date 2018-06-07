@@ -8,15 +8,7 @@ module ApplicationHelper
     end
   end
 
-  def validate_expression expression
-    begin
-      expression
-    rescue
-      0
-    end
-  end
-
-  def current_user
-    current_client || current_admin
+  def context_user
+    current_user || current_accountant
   end
 end

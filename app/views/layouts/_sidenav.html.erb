@@ -2,7 +2,7 @@
   <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
       <div class="navbar nav_title" style="border: 0;">
-        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+        <a href="/" class="site_title"><i class="fa fa-paw"></i> <span>VBee logs</span></a>
       </div>
 
       <div class="clearfix"></div>
@@ -26,14 +26,25 @@
         <div class="menu_section">
           <h3>General</h3>
           <ul class="nav side-menu">
-            <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+            <li><%= link_to root_path do %>
+              <i class="fa fa-home"></i> Home
+            <% end %></li>
+            <!-- <li><a><i class="fa fa-home"></i> Statitics</a></li> -->
+            <li><a><i class="fa fa-edit"></i> Manage Apps <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
-                <li><a href="/">Dashboard</a></li>
+                <% current_user.client.apps.each do |app| %>
+                  <li><%= link_to app.name, app %></li>
+                <% end %>
               </ul>
             </li>
+            <li>
+              <%= link_to pays_path do %>
+                <i class="fa fa-money"></i> Checkout
+              <% end %>
+            </li>
+
           </ul>
         </div>
-
       </div>
       <!-- /sidebar menu -->
 
@@ -42,9 +53,9 @@
         <a data-toggle="tooltip" data-placement="top" title="Settings">
           <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
         </a>
-        <%= link_to "javascript:void(0)", onclick: "screenfull.toggle();", data: {toggle: :tooltip, placement: :top}, title: "Fullscreen" do %>
+        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
           <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-        <% end %>
+        </a>
         <a data-toggle="tooltip" data-placement="top" title="Lock">
           <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
         </a>
